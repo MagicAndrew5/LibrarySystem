@@ -23,7 +23,7 @@ html, body
 /* Background image for menu, making sure no repeats */
 .backgroundfix
 {
-    background: url("library-book.jpg") no-repeat center center;
+    background: url("StartPage.jpg") no-repeat center center;
     background-size: cover;
     height: 500px;
 }
@@ -189,7 +189,7 @@ nav ul li a:hover {
 
 .backgroundfix3
 {
-    background: url(http://localhost/Source-Code/Pictures/RegisterPic.jpg) no-repeat center center;
+    background: url("RegistrationPic.jpg") no-repeat center center;
     background-size: cover;
     height: 500px;
 }
@@ -343,7 +343,7 @@ input[type='Submit']:hover
 /* PHP for Login */
 .backgroundfix4
 {
-    background: url(http://localhost/Source-Code/Pictures/LoginPic.png) no-repeat center center;
+    background: url("SignInPic.jpg") no-repeat center center;
     background-size: cover;
     height: 500px;
 }
@@ -399,7 +399,7 @@ input[type='Submit']:hover
 
 .backgroundfix6
 {
-    background: url(http://localhost/Source-Code/Pictures/SearchPic.jpg) no-repeat center center;
+    background: url("SearchPage.jpg") no-repeat center center;
     background-size: cover;
     height: 500px;
 }
