@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--Linking to CSS-->
+    <link rel="stylesheet" type="text/css" th:href="@{/basicStyle.css}" />
+    <meta charset="utf-8">
+    <title>Library Website</title>
+</head>
+
+<body>
+
+    <div class="background">
+        <div class="container">
+            <div class="main">
+                <h1>B.M. Library</h1>
+                <p class="btn-primary"> Welcome to the official B.M. Library Website! Log in to manage your account,
+                    search for books and register new books</p>
+            </div>
+        </div>
+
+        <div class="supporting">
+            <div class="container">
+                <div class="col">
+                    <h2>Sign In</h2>
+                    <p>Sign into your account, to view your books.</p>
+                    <a class="btn-default" th:href="@{/signIn}">Sign In</a>
+                </div>
+                <div class="col">
+                    <h2>Search For Books</h2>
+                    <p>Search for the books you like right now.</p>
+                    <a class="btn-default" th:href="@{/searchBook}">Search</a>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+    </div>
+
+</body>
+</html>

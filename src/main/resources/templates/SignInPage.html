@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--Linking to CSS-->
+    <link type="text/css" rel="stylesheet" href="../static/index_style.css"/>
+    <meta charset="utf-8">
+    <title>Register</title>
+</head>
+
+<body>
+
+<!--
+<div class="backgroundSign">
+    <div class="container">
+        <div class="main">
+            <h1>Log in</h1>
+            <p class="btn-primary">Log in to access your account, view books and search for books.</p>
+        </div>
+    </div>
+</div>
+-->
+<div class="Form">
+    <h1>Fill in the form below</h1>
+    <form th:action="@{/checkAccount}" method="post" th:object="${user}" style="max-width: 500px; margin: 0 auto;">
+        <input type="text" th:field="*{username}" placeholder="Username" required minlength="2" maxlength="45"/>
+        <input type="password" th:field="*{password}" placeholder="Password" required minlength="2" maxlength="45" />
+
+        <div class="text-center">
+            <button type="submit" name="Submit">Login</button>
+        </div>
+
+    </form>
+    <p> Not registered yet?
+        <a th:href="@{/registerNewUser}">Register Here</a>
+    </p>
+</div>
+
+
+
+
+
+
+
+
+</body>
+</html>

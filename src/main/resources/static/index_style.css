@@ -1,8 +1,4 @@
-html, body
-{
-    margin: 0;
-    padding: 0;
-}
+
 
 
 /* Perfecting the size of the 3 buttons down */
@@ -20,13 +16,7 @@ html, body
     color: rgb(160, 200, 255);
 }
 
-/* Background image for menu, making sure no repeats */
-.backgroundfix
-{
-    background: url("StartPage.jpg") no-repeat center center;
-    background-size: cover;
-    height: 500px;
-}
+
 
 /* Navigator Background */
 .header
@@ -70,70 +60,20 @@ nav ul li a:hover {
     background-color: rgba(255, 255, 255, 0.3); /* Background color with transparency */
 }
 
-/* Position of Top Page */
-.main
-{
-    position: relative;
-    top: 180px;
-    text-align: center;
-}
 
-/* Title of Page */
-.main h1
-{
-    color: #ffffff;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 600;
-    font-size: 70px;
-    margin-top: 0;
-    text-align: center;
-    margin-bottom: 80px;
-    text-transform: uppercase;
-}
 
-/* Description after title */
-.btn-primary
-{
-    background-color: rgba(100, 100, 100, 0.5);
-    color: #fff;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 600;
-    font-size: 18px;
-    letter-spacing: 1.3px;
-    padding: 16px 40px;
-    text-decoration: none;
-    border-radius: 25px;
-}
 
-/* The three bottons */
-.btn-default
-{
-    border: 1px solid #333;
-    color: #333;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 600;
-    font-size: 10px;
-    letter-spacing: 1.3px;
-    padding: 10px 20px;
-    text-decoration: none;
-    text-transform: uppercase;
-    display: inline-block;
-    margin-bottom: 20px;
-    border-radius: 5px;
-}
 
-/* Positioning for lower page */
-.supporting
-{
-    padding-top: 80px;
-    padding-bottom: 100px;
-}
+
+
+
 
 /* Column position */
 .supporting .col
 {
+    color: #ffffff;
     float: left;
-    width: 33%;
+    width: 50%;
     font-family: 'Raleway', sans-serif;
     text-align: center;
 }
@@ -162,11 +102,7 @@ nav ul li a:hover {
     margin-bottom: 40px;
 }
 
-/* Lining */
-.clearfix
-{
-    clear: both;
-}
+
 
 /* Footer background */
 /* Making the footer */
@@ -343,7 +279,7 @@ input[type='Submit']:hover
 /* PHP for Login */
 .backgroundfix4
 {
-    background: url("SignInPic.jpg") no-repeat center center;
+    background: url("images/SignInPic.jpg") no-repeat center center;
     background-size: cover;
     height: 500px;
 }
@@ -353,22 +289,6 @@ input[type='Submit']:hover
     font-family: 'Raleway', sans-serif;
     text-align: center;
 
-}
-
-/* PHP for Logged Out */
-.backgroundfix5
-{
-    background: url(http://localhost/Source-Code/Pictures/LogoutPic.jpg) no-repeat center center;
-    background-size: cover;
-    height: 500px;
-}
-
-/* For Reserve Page */
-.backgroundfixReserve
-{
-    background: url(http://localhost/Source-Code/Pictures/ReservePic.jpg) no-repeat center center;
-    background-size: cover;
-    height: 500px;
 }
 
 /* PHP/HTML for Search Page */
@@ -399,7 +319,7 @@ input[type='Submit']:hover
 
 .backgroundfix6
 {
-    background: url("SearchPage.jpg") no-repeat center center;
+    background: url("../templates/SearchPage.jpg") no-repeat center center;
     background-size: cover;
     height: 500px;
 }

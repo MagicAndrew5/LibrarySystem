@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <!--Linking to CSS-->
+    <link type="text/css" rel="stylesheet" th:href="@{/index_style.css}"/>
+    <title>Search</title>
+</head>
+
+<body>
+
+
+
+<div class="backgroundfix6">
+    <div class="container">
+        <div class="main">
+            <h1>Search</h1>
+            <p class="btn-primary">Search for a book in the library, you may wish to reserve it if avaliable.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Search Form Start -->
+<br>
+<!-- CSS to style the form. -->
+<div class="Form2">
+    <!-- CSS to style the header. -->
+    <h1 class="loginheader">Search For A Book</h1>
+
+    <!-- Form Start. -->
+
+    <form th:action="@{/searchBooks}" method="post" th:object="${books}">
+        <input type="text" th:field="*{ISBN}" placeholder="ISBN"/>
+        <input type="text" th:field="*{author}" placeholder="Author"/>
+        <input type="text" th:field="*{title}" placeholder="Title"/>
+
+        <input name="submit" th:type="submit" value="Search" />
+    </form>
+
+</div>
+
+<!--Start of footer-->
+<br><br>
+
+
+</body>
+</html>

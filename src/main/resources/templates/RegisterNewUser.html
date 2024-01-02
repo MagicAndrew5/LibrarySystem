@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--Linking to CSS-->
+    <link type="text/css" rel="stylesheet" href="../static/index_style.css"/>
+    <meta charset="utf-8">
+    <title>Register</title>
+</head>
+
+<body>
+    <div class="backgroundfix3">
+        <div class="container">
+            <div class="main">
+                <h1>Registration</h1>
+                <p class="btn-primary">Sign up to this library website to reserve books, an account is always good to have.</p>
+            </div>
+        </div>
+    </div>
+    <div class="Form">
+        <h1>Fill in the form below</h1>
+        <form th:action="@{/saveAccount}" method="post" th:object="${user}" style="max-width: 500px; margin: 0 auto;">
+            <input type="hidden" th:field="*{id}">
+            <input type="text" th:field="*{name}" placeholder="First Name" required minlength="2" maxlength="45"/>
+            <input type="text" th:field="*{surname}" placeholder="Surname" required minlength="2" maxlength="45" />
+            <input type="text" th:field="*{username}" placeholder="Username" required minlength="2" maxlength="45" />
+            <input type="text" th:field="*{email}" placeholder="E-mail" required minlength="2" maxlength="45" />
+            <input type="password" th:field="*{password}" placeholder="Password" required minlength="2" maxlength="45" />
+            <input type="password" field="password" placeholder="Confirm Your Password" required minlength="2" maxlength="45" />
+            <input type="text" th:field="*{phoneNumber}" placeholder="Mobile" required minlength="2" maxlength="10" />
+            <input type="text" th:field="*{city}" placeholder="City" required minlength="2" maxlength="45" />
+
+            <div class="text-center">
+                <button type="submit" name="Submit">Register</button>
+            </div>
+
+        </form>
+    </div>
+
+</body>
+</html>
