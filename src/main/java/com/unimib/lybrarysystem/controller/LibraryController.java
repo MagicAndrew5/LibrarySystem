@@ -17,7 +17,7 @@ public class LibraryController {
     private LibraryService service;
 
     @GetMapping("/")
-    public String showHomePage() {
+    public String showStartPage() {
         return "index";
     }
 
@@ -39,22 +39,24 @@ public class LibraryController {
         return "RegisterNewUser";
     }
 
+    @GetMapping("/HomePage")
+    public String showHomePage(Model model) {
+        model.addAttribute("user", new User());
+        return "HomePage";
+    }
+
     @PostMapping("/searchBooks")
     public String listBookPage(Book book, Model model) {
         List<Book> foundBooks = service.findByAttributes(book);
-        for (Book b : foundBooks) {
-            System.out.println("Prova2:" + b);
-        }
         model.addAttribute("foundBooks", foundBooks);
-        System.out.println(model);
         return "listBookPage";
     }
 
     @PostMapping("/checkAccount")
-    public String showHomePage(User user, Model model) {
+    public String checkAccount(User user, Model model) {
         service.checkLogin(user);
         model.addAttribute("user", user);
-        return "HomePage";
+        return "redirect:/HomePage";
     }
 
 
@@ -62,7 +64,7 @@ public class LibraryController {
     public String addNewAccount(User user, Model model) {
         service.checkSave(user);
         model.addAttribute("user", user);
-        return "HomePage";
+        return "redirect:/HomePage";
     }
 
 }

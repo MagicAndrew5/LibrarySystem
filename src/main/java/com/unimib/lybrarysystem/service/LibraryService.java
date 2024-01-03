@@ -25,11 +25,11 @@ public class LibraryService {
     }
 
     public void checkLogin(User user) {
-
-        if(repo.findByEmailPassword(user.getEmail(), user.getPassword()) != null) {
+        if(repo.findByUsernamePassword(user.getUsername(), user.getPassword()) != null) {
             System.out.println("Redirect to homePage");
         } else {
-            System.out.println("Email or Password are invalid");
+
+            System.out.println("Username or Password are invalid");
         }
     }
 
