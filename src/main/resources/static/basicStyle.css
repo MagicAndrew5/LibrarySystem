@@ -7,7 +7,7 @@ html, body
 /* Background image for menu, making sure no repeats */
 .background
 {
-    background: url('/images/StartPage.png') no-repeat center center fixed;
+    background: url('images/StartPage.png') no-repeat center center fixed;
     background-size: cover;
     height: 1080px;
 }
@@ -15,11 +15,17 @@ html, body
 /* Background image for menu, making sure no repeats */
 .backgroundSign
 {
-    background: url('/images/SignInPic.jpg') no-repeat center center fixed;
+    background: url('images/SignInPic.jpg') no-repeat center center fixed;
     background-size: cover;
     height: 1080px;
 }
 
+.backgroundSearchBook
+{
+    background: url('images/SearchPage.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 1080px;
+}
 /* Perfecting the size of the 3 buttons down */
 .container
 {
@@ -39,7 +45,7 @@ html, body
 .main
 {
     position: relative;
-    top: 180px;
+    top: 130px;
     text-align: center;
 }
 
@@ -49,7 +55,7 @@ html, body
     color: #ffffff;
     font-family: 'Raleway', sans-serif;
     font-weight: 600;
-    font-size: 70px;
+    font-size: 60px;
     margin-top: 0;
     text-align: center;
     margin-bottom: 80px;
@@ -68,6 +74,17 @@ html, body
     padding: 16px 40px;
     text-decoration: none;
     border-radius: 25px;
+}
+
+.cool-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #074709;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
 }
 
 /* The three bottons */
@@ -110,9 +127,23 @@ html, body
     font-weight: 50;
     font-size: 10px;
     text-align: center;
-    margin-bottom: 60px; /* Margin from footer */
+    padding: 17em;
+    border-radius: 20px;
+    margin-bottom: 40px; /* Margin from footer */
     text-transform: uppercase;
 }
+
+.Form2
+{
+    color: #000000;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 50;
+    font-size: 10px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+
 
 input[type='text'], input[type='password']
 {
@@ -155,5 +186,22 @@ a:hover
     text-decoration: underline;
 }
 
+.loginheader
+{
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
 
+}
 
+/* da capire se sono da usare o meno*/
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Flexbox layout for the form */
+.search-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px; /* Adjust as needed */
+}

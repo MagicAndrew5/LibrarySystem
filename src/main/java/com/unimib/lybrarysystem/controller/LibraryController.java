@@ -30,7 +30,7 @@ public class LibraryController {
     @GetMapping("/searchBook")
     public String showSearchBookPage(Model model) {
         model.addAttribute("books", new Book());
-        return "SearchPage";
+        return "SearchBook";
     }
 
     @GetMapping("/registerNewUser")
