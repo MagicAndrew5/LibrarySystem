@@ -125,7 +125,7 @@ nav ul li a:hover {
 
 .backgroundfix3
 {
-    background: url("RegistrationPic.jpg") no-repeat center center;
+    background: url('images/RegistrationPic.jpg') no-repeat center center;
     background-size: cover;
     height: 500px;
 }
@@ -331,5 +331,19 @@ select
     font-size: 15px;
     overflow: hidden;
 }
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
 
 /* Reservation Page */
