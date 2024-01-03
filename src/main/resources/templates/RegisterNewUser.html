@@ -2,24 +2,23 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <!--Linking to CSS-->
-    <link type="text/css" rel="stylesheet" th:href="@{/index_style.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/basicStyle.css}"/>
     <meta charset="utf-8">
     <title>RegisterNewUser</title>
 </head>
 
 <body>
-    <div class="backgroundfix3">
-        <div class="container">
-            <div class="main">
-                <h1>Registration</h1>
-                <p class="btn-primary">Sign up to this library website to reserve books, an account is always good to have.</p>
-            </div>
-        </div>
-    </div>
-    <body>
+    <div class="backgroundregistration">
 
         <div th:if="${message}" class="alert alert-danger">
             [[${message}]]
+        </div>
+
+        <div class="container">
+            <div class="remain">
+                <h1>Registration</h1>
+                <p class="btn-primary">Sign up to this library website to reserve books, an account is always good to have.</p>
+            </div>
         </div>
 
         <div class="Form">
@@ -39,5 +38,6 @@
                 </div>
             </form>
         </div>
-    </body>
+    </div>
+</body>
 </html>

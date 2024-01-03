@@ -2,12 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <!--Linking to CSS-->
-    <link type="text/css" rel="stylesheet" href="../static/index_style.css"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/index_style.css}"/>
     <meta charset="utf-8">
     <title>Register</title>
 </head>
 
 <body>
+<div th:if="${message}" class="alert alert-danger">
+    [[${message}]]
+</div>
 
 <!--
 <div class="backgroundSign">
