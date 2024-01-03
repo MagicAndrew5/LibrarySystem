@@ -1,4 +1,8 @@
-
+html, body
+{
+    margin: 0;
+    padding: 0;
+}
 
 
 /* Perfecting the size of the 3 buttons down */
@@ -16,7 +20,13 @@
     color: rgb(160, 200, 255);
 }
 
-
+/* Background image for menu, making sure no repeats */
+.backgroundfix
+{
+    background: url('images/StartPage.png') no-repeat center center;
+    background-size: cover;
+    height: 500px;
+}
 
 /* Navigator Background */
 .header
@@ -60,16 +70,67 @@ nav ul li a:hover {
     background-color: rgba(255, 255, 255, 0.3); /* Background color with transparency */
 }
 
+/* Position of Top Page */
+.main
+{
+    position: relative;
+    top: 180px;
+    text-align: center;
+}
 
+/* Title of Page */
+.main h1
+{
+    color: #ffffff;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 70px;
+    margin-top: 0;
+    text-align: center;
+    margin-bottom: 80px;
+    text-transform: uppercase;
+}
 
+/* Description after title */
+.btn-primary
+{
+    background-color: rgba(100, 100, 100, 0.5);
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: 1.3px;
+    padding: 16px 40px;
+    text-decoration: none;
+    border-radius: 25px;
+}
 
+/* The three bottons */
+.btn-default
+{
+    border: 1px solid #333;
+    color: #ffffff;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 1.3px;
+    padding: 10px 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
 
-
-
-
+/* Positioning for lower page */
+.supporting
+{
+    padding-top: 300px;
+    padding-bottom: 100px;
+}
 
 /* Column position */
-.supporting .col
+.col
 {
     color: #ffffff;
     float: left;
@@ -102,7 +163,11 @@ nav ul li a:hover {
     margin-bottom: 40px;
 }
 
-
+/* Lining */
+.clearfix
+{
+    clear: both;
+}
 
 /* Footer background */
 /* Making the footer */
@@ -111,6 +176,13 @@ nav ul li a:hover {
     background-color: #333;
     color: #ffffff;
     padding: 15px 0;
+}
+/* Background image for menu, making sure no repeats */
+.backgroundSign
+{
+    background: url("../static/images/SignInPic.jpg") no-repeat center center fixed;
+    background-size: cover;
+    height: 1080px;
 }
 
 /* Description in footer */
@@ -130,15 +202,15 @@ nav ul li a:hover {
     height: 500px;
 }
 
-form
+.Form
 {
-    /* Just to center the form on the page */
-    margin: 0 auto;
-    width: 400px;
-
-    /* To see the outline of the form */
-    padding: 1em;
-    border-radius: 1em;
+    color: #ffffff;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 50;
+    font-size: 10px;
+    text-align: center;
+    margin-bottom: 60px; /* Margin from footer */
+    text-transform: uppercase;
 }
 
 form div + div
@@ -252,7 +324,7 @@ form input[type="text"], form input[type="password"] {
 /* PHP for Login */
 .backgroundfix4
 {
-    background: url("images/SignInPic.jpg") no-repeat center center;
+    background: url("../static/images/SignInPic.jpg") no-repeat center center;
     background-size: cover;
     height: 500px;
 }
@@ -262,6 +334,22 @@ form input[type="text"], form input[type="password"] {
     font-family: 'Raleway', sans-serif;
     text-align: center;
 
+}
+
+/* PHP for Logged Out */
+.backgroundfix5
+{
+    background: url(http://localhost/Source-Code/Pictures/LogoutPic.jpg) no-repeat center center;
+    background-size: cover;
+    height: 500px;
+}
+
+/* For Reserve Page */
+.backgroundfixReserve
+{
+    background: url(http://localhost/Source-Code/Pictures/ReservePic.jpg) no-repeat center center;
+    background-size: cover;
+    height: 500px;
 }
 
 /* PHP/HTML for Search Page */
@@ -297,26 +385,37 @@ form input[type="text"], form input[type="password"] {
     height: 500px;
 }
 
-.select
+.backgroundfix7
+{
+    background: url("../static/images/RegisterNewBook.jpg") no-repeat center center;
+    background-size: cover;
+    height: 500px;
+}
+
+.backgroundfix8
+{
+    background: url("../static/images/HomePage.jpg") no-repeat center center;
+    background-size: cover;
+    height: 500px;
+}
+select
 {
     background-color: #A9A9A9;
     border: 10px solid #A9A9A9;
     font-size: 15px;
     overflow: hidden;
 }
-
-.alert {
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-    border-radius: 4px;
+/* ! Carousel */
+.main-carousel{
+    padding: 40px 0;
 }
 
-.alert-danger {
-    color: #721c24;
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
+.carousel-cell{
+    height: 300px;
+    width: 250px;
+    background-color: #0067ab;
+    line-height: 270px;
+    text-align: center;
+    margin-right: 40px;
 }
-
-
 /* Reservation Page */
