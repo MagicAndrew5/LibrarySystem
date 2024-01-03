@@ -14,25 +14,23 @@ public class LibraryService {
     @Autowired
     private LibraryRepository repo;
 
-    public void checkSave(User user) {
+    public boolean checkSave(User user) {
         User existingUser = repo.findByEmail(user.getEmail());
         if(existingUser != null) {
-            System.out.println("Email already in use");
+            return false;
         } else {
             repo.save(user);
-            System.out.println("Email not in use");
+            return true;
         }
     }
 
-    public void checkLogin(User user) {
-
-        if(repo.findByEmailPassword(user.getEmail(), user.getPassword()) != null) {
-            System.out.println("Redirect to homePage");
+    public boolean checkLogin(User user) {
+        if(repo.findByUsernamePassword(user.getUsername(), user.getPassword()) != null) {
+            return true;
         } else {
-            System.out.println("Email or Password are invalid");
+            return false;
         }
     }
-
 
     public List<Book> findByAttributes(Book book) {
         return repo.findByAttributes(book.getISBN(), book.getAuthor(), book.getTitle());

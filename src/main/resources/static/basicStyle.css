@@ -20,6 +20,14 @@ html, body
     height: 1080px;
 }
 
+/* Background image for menu, making sure no repeats */
+.backgroundregistration
+{
+    background: url('images/RegistrationPic.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 1080px;
+}
+
 .backgroundSearchBook
 {
     background: url('images/SearchPage.jpg') no-repeat center center fixed;
@@ -56,6 +64,26 @@ html, body
     font-family: 'Raleway', sans-serif;
     font-weight: 600;
     font-size: 60px;
+    margin-top: 0;
+    text-align: center;
+    margin-bottom: 80px;
+    text-transform: uppercase;
+}
+
+.remain
+{
+    position: relative;
+    padding-top: 80px;
+    text-align: center;
+}
+
+/* Title of Page */
+.remain h1
+{
+    color: #ffffff;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 70px;
     margin-top: 0;
     text-align: center;
     margin-bottom: 80px;
@@ -119,71 +147,39 @@ html, body
     clear: both;
 }
 
-/* For all the form options in pages */
-.Form
-{
-    color: #ffffff;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 50;
-    font-size: 10px;
-    text-align: center;
-    padding: 17em;
-    border-radius: 20px;
-    margin-bottom: 40px; /* Margin from footer */
-    text-transform: uppercase;
-}
-
-.Form2
-{
-    color: #000000;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 50;
-    font-size: 10px;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-
-
-input[type='text'], input[type='password']
-{
-    text-align: center;
-    width: 200px;
-    border-radius:
-            2px;border:
-        1px solid #CCC;
-    padding: 10px;
-    color: #333;
-    font-size: 14px;
-    margin-top: 15px;
-}
-
-input[type='Submit']
-{
-    text-align: center;
-    padding: 10px 15px 8px;
-    text-align: center;
-    color: #fff;
-    background-color: #000000; /* Black */
-    font-size: 16px;
+.Form {
+    background-color: rgba(255, 255, 255, 0.3); /* Imposta l'opacità del colore di sfondo */
+    padding: 30px;
     border-radius: 10px;
-    margin-top: 20px;
-    cursor:pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 50px auto;
 }
 
-input[type='Submit']:hover
-{
-    background-color: #A9A9A9; /* Light Grey */
+.Form h1 {
+    color: #ffffff; /* White text color */
+    font-size: 30px; /* Smaller font size */
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    margin-top: 0;
+    text-align: center;
 }
 
-a
-{
-    color: #0067ab;
-    text-decoration: none;
+/* Form styles */
+form input[type="text"], form input[type="password"] {
+    width: calc(100% - 25px); /* Larghezza al 100% meno 15px per il bordo a destra */
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
 }
-a:hover
-{
-    text-decoration: underline;
+
+.form button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    border: none;
 }
 
 .loginheader

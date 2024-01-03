@@ -197,7 +197,7 @@ nav ul li a:hover {
 
 .backgroundfix3
 {
-    background: url("../static/images/RegistrationPic.jpg") no-repeat center center;
+    background: url('images/RegistrationPic.jpg') no-repeat center center;
     background-size: cover;
     height: 500px;
 }
@@ -294,59 +294,32 @@ a:hover
     text-decoration: underline;
 }
 
-/* For all the form options in pages */
-.Form
-{
-    color: #000000;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 50;
-    font-size: 10px;
-    text-align: center;
-    margin-bottom: 25px; /* Margin from footer */
-    text-transform: uppercase;
-}
-
-.Form2
-{
-    color: #000000;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 50;
-    font-size: 10px;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-input[type='text'], input[type='password']
-{
-    text-align: center;
-    width: 200px;
-    border-radius:
-            2px;border:
-        1px solid #CCC;
-    padding: 10px;
-    color: #333;
-    font-size: 14px;
-    margin-top: 15px;
-}
-
-
-input[type='Submit']
-{
-    text-align: center;
-    padding: 10px 15px 8px;
-    text-align: center;
-    color: #fff;
-    background-color: #000000; /* Black */
-    font-size: 16px;
+.Form {
+    background-color: #fff;
+    padding: 30px;
     border-radius: 10px;
-    margin-top: 20px;
-    cursor:pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 50px auto;
 }
 
-input[type='Submit']:hover
-{
-    background-color: #A9A9A9; /* Light Grey */
+/* Form styles */
+form input[type="text"], form input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
 }
+
+.form button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    border: none;
+}
+
 
 /* PHP for Login */
 .backgroundfix4

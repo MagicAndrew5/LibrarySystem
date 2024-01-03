@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.util.List;
 
 @Controller
@@ -17,7 +19,7 @@ public class LibraryController {
     private LibraryService service;
 
     @GetMapping("/")
-    public String showHomePage() {
+    public String showStartPage() {
         return "index";
     }
 
@@ -39,30 +41,42 @@ public class LibraryController {
         return "RegisterNewUser";
     }
 
+    @GetMapping("/HomePage")
+    public String showHomePage(Model model) {
+        model.addAttribute("user", new User());
+        return "HomePage";
+    }
+
     @PostMapping("/searchBooks")
     public String listBookPage(Book book, Model model) {
         List<Book> foundBooks = service.findByAttributes(book);
-        for (Book b : foundBooks) {
-            System.out.println("Prova2:" + b);
-        }
         model.addAttribute("foundBooks", foundBooks);
-        System.out.println(model);
         return "listBookPage";
     }
 
     @PostMapping("/checkAccount")
-    public String showHomePage(User user, Model model) {
-        service.checkLogin(user);
+    public String checkAccount(User user, Model model, RedirectAttributes ra) {
+        boolean validCheck = service.checkLogin(user);
         model.addAttribute("user", user);
-        return "HomePage";
+        if(validCheck) {
+            return "redirect:/HomePage";
+        } else {
+            ra.addFlashAttribute("message", "Username or password are incorrect, please try again");
+            return "redirect:/signIn";
+        }
     }
 
 
     @PostMapping("/saveAccount")
-    public String addNewAccount(User user, Model model) {
-        service.checkSave(user);
+    public String addNewAccount(User user, Model model, RedirectAttributes ra) {
+        boolean validAccount = service.checkSave(user);
         model.addAttribute("user", user);
-        return "HomePage";
+        if(validAccount) {
+            return "redirect:/HomePage";
+        } else {
+            ra.addFlashAttribute("message", "The user already exists, please try again");
+            return "redirect:/registerNewUser";
+        }
     }
 
 }
