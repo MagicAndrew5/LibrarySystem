@@ -2,25 +2,49 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" th:href="@{/basicStyle.css}"/>
     <title>List Book Page</title>
 </head>
 <body>
-<table>
-    <tr>
-        <th>ISBN</th>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Genre</th>
-        <th>Publisher</th>
-    </tr>
-    <tr th:each="book : ${foundBooks}">
-        <td th:text="${book.ISBN}">-</td>
-        <td th:text="${book.title}">-</td>
-        <td th:text="${book.author}">-</td>
-        <td th:text="${book.genre}">-</td>
-        <td th:text="${book.publisher}">-</td>
-    </tr>
-</table>
+    <table>
+        <tr>
+            <th>ISBN</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Publisher</th>
+        </tr>
+        <tr th:each="book : ${foundBooks}">
+            <td th:text="${book.ISBN}">-</td>
+            <td th:text="${book.title}">-</td>
+            <td th:text="${book.author}">-</td>
+            <td th:text="${book.genre}">-</td>
+            <td th:text="${book.publisher}">-</td>
+        </tr>
+    </table>
+
+    <!-- Bottone per mostrare/nascondere il form -->
+    <button onclick="toggleForm()">Mostra/Nascondi Form</button>
+
+    <!-- Form nascosto inizialmente
+    <div id="Form">
+        <form th:action="@{/addBook}" th:object="${foundBooks}, ${libraryMember}" method="post" style="max-width: 500px; margin: 0 auto;">
+            <input type="text" th:field="*{username}" placeholder="Username" required minlength="2" maxlength="45"/>
+            <input type="text" th:field="*{username}" placeholder="Username" required minlength="2" maxlength="45"/>
+            <input type="text" th:field="*{username}" placeholder="Username" required minlength="2" maxlength="45"/>
+            <input type="text" th:field="*{username}" placeholder="Username" required minlength="2" maxlength="45"/>
+            <button type="submit">Invia</button>
+        </form>
+    </div>
+    -->
+<!--
+<script>
+    function toggleForm() {
+        var form = document.getElementById('myForm');
+        form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    }
+</script>
+-->
 
 </body>
 </html>
