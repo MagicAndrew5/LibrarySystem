@@ -1,38 +1,101 @@
 package com.unimib.lybrarysystem.service;
 
 import com.unimib.lybrarysystem.model.Book;
+import com.unimib.lybrarysystem.model.LibraryMember;
 import com.unimib.lybrarysystem.model.User;
-import com.unimib.lybrarysystem.repository.LibraryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.unimib.lybrarysystem.repository.BookRepository;
+import com.unimib.lybrarysystem.repository.LibraryMemberRepository;
+import com.unimib.lybrarysystem.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class LibraryService {
 
-    @Autowired
-    private LibraryRepository repo;
+    // ------------------- ATTRIBUTES -------------------
+    private final UserRepository userRepo;
+    private final BookRepository bookRepo;
+    private final LibraryMemberRepository libraryMemberRepo;
 
-    public boolean checkSave(User user) {
-        User existingUser = repo.findByEmail(user.getEmail());
+
+    // ------------------- CONSTRUCTOR -------------------
+    /**
+     * Constructs a LibraryService object with specified parameters.
+     *
+     * @param userRepo The user repository.
+     * @param bookRepo The book repository.
+     * @param libraryMemberRepo The library member repository.
+     */
+    public LibraryService(UserRepository userRepo, BookRepository bookRepo, LibraryMemberRepository libraryMemberRepo) {
+        this.userRepo = userRepo;
+        this.bookRepo = bookRepo;
+        this.libraryMemberRepo = libraryMemberRepo;
+    }
+
+
+    // ------------------- METHODS -------------------
+    /**
+     * Checks if the user is already registered in the system.
+     *
+     * @param user The user to check.
+     * @param libraryMember The library member to check.
+     * @return true if the user is not already registered in the system, false otherwise.
+     */
+    public boolean checkSaveAccount(User user, LibraryMember libraryMember) {
+        User existingUser = userRepo.findByEmail(user.getEmail());
         if(existingUser != null) {
             return false;
         } else {
-            repo.save(user);
+
+            // Set the name of the library member to the name of the user
+            libraryMember.setName(user.getName());
+
+            // Generate random ID and set this value to the libraryMember
+            Random random = new Random();
+            int randomId = random.nextInt(900000000) + 100000000;
+            libraryMember.setId(randomId);
+
+            // Set the membership date to the current date
+            libraryMember.setMembershipDate(LocalDate.now().toString());
+
+            //TODO Set address during registration
+            libraryMember.setAddress("Via Merlina 24");
+
+            user.setLibraryMember(libraryMember);
+
+            libraryMemberRepo.save(libraryMember);
+            userRepo.save(user);
             return true;
         }
     }
 
-    public boolean checkLogin(User user) {
-        if(repo.findByUsernamePassword(user.getUsername(), user.getPassword()) != null) {
+
+    /**
+     * Checks if the provided user's credentials match any existing user in the system.
+     *
+     * @param user The user object containing the username and password to be checked.
+     * @return true if a user with the provided username and password exists, false otherwise.
+     */
+    public boolean checkLoginAccount(User user) {
+        if(userRepo.findByUsernamePassword(user.getUsername(), user.getPassword()) != null) {
             return true;
         } else {
             return false;
         }
     }
 
+
+    /**
+     * Finds books in the repository that match the provided attributes.
+     *
+     * @param book The book object containing the ISBN, author, and title to be matched.
+     * @return A list of books that match the provided attributes.
+     */
     public List<Book> findByAttributes(Book book) {
-        return repo.findByAttributes(book.getISBN(), book.getAuthor(), book.getTitle());
+        return bookRepo.findByAttributes(book.getISBN(), book.getAuthor(), book.getTitle());
     }
+
 }
