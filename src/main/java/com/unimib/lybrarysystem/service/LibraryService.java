@@ -9,7 +9,6 @@ import com.unimib.lybrarysystem.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -98,16 +97,23 @@ public class LibraryService {
     }
 
     public void addLinkBookToLibraryMember(Book book, LibraryMember libraryMember) {
-
-        // Retrieve the actual book from the database
-        Book actualBook = bookRepo.findByISBN(book.getISBN());
-        System.out.println("Book Service: " + actualBook);
-        System.out.println("FINO QUI TUTTO BENE");
-
-        //List<Book> bookList = new ArrayList<>();
-        //bookList.add(book);
-        //libraryMember.setBorrowedBooks(bookList);
+        // Relationship between book and library member
+        book.getBorrowingMembers().add(libraryMember);
+        bookRepo.save(book);
     }
 
+    public User findUser(User user) {
+        // Retrieve the actual user from the database
+        return userRepo.findByUsernamePassword(user.getUsername(), user.getPassword());
+    }
 
+    public LibraryMember findLibraryMember(LibraryMember libraryMember) {
+        // Retrieve the actual librarymember from the database
+        return libraryMemberRepo.findLibraryMemberById(libraryMember.getId());
+    }
+
+    public Book findBook(Book book) {
+        // Retrieve the actual book from the database
+        return bookRepo.findByISBN(book.getISBN());
+    }
 }

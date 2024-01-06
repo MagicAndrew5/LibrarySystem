@@ -247,10 +247,10 @@ public class Book {
                 ", author='" + author + '\'' +
                 ", genre='" + genre + '\'' +
                 ", publisher='" + publisher + '\'' +
-                ", authors=" + authors +
                 ", genreList=" + genreList +
                 '}';
     }
+    //TODO understand why this is not working with authors and borrowingMembers
 
     /**
      * Indicates whether some other object is "equal to" this one.

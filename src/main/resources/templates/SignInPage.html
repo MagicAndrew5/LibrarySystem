@@ -26,7 +26,6 @@
             <form th:action="@{/checkAccount}" method="post" th:object="${user}" style="max-width: 500px; margin: 0 auto;">
                 <input type="text" th:field="*{username}" placeholder="Username" required minlength="2" maxlength="45"/>
                 <input type="password" th:field="*{password}" placeholder="Password" required minlength="2" maxlength="45" />
-
                 <div class="text-center">
                     <br>
                     <button class="cool-button" type="submit" name="Submit">Login</button>

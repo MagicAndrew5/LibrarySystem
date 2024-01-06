@@ -16,4 +16,7 @@ public interface LibraryMemberRepository extends CrudRepository<LibraryMember, I
     void addLibraryMemberToBook(Integer id, Integer isbn);
 
      */
+
+    @Query("SELECT lm FROM LibraryMember lm WHERE lm.id = :id")
+    LibraryMember findLibraryMemberById(Integer id);
 }
