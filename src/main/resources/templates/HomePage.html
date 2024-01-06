@@ -10,18 +10,6 @@
 </head>
 <body>
 
-<div id="Form">
-    <form th:action="@{/saveLibraryMember}" th:object="${libraryMember}" method="post" style="max-width: 500px; margin: 0 auto;">
-        <!--
-            <input type="text" th:field="*{name}" placeholder="Username" required minlength="2" maxlength="45"/>
-        -->
-        <input type="text" th:field="*{address}" placeholder="Address" required minlength="2" maxlength="45"/>
-        <button type="submit">Create MemberCard</button>
-    </form>
-</div>
-
-
-
 <div class=" header">
 <div class="container">
 
@@ -83,8 +71,17 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/3.0.0/flickity.pkgd.min.js" integrity="sha512-achKCfKcYJg0u0J7UDJZbtrffUwtTLQMFSn28bDJ1Xl9DWkl/6VDT3LMfVTo09V51hmnjrrOTbtg4rEgg0QArA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-</body>
-</html>
+
+<div class="supporting">
+    <div class="container">
+        <div class="col">
+            <h2>Search For Books</h2>
+            <p>Search for the books you like right now.</p>
+            <a class="btn-default" th:href="@{/searchBook}">Search</a>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
 
 </body>
 </html>

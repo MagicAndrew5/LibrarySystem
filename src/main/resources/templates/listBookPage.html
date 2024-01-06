@@ -6,6 +6,7 @@
     <title>List Book Page</title>
 </head>
 <body>
+<form th:action="@{/addBook}" method="post" th:each="book : ${foundBooks}">
     <table>
         <tr>
             <th>ISBN</th>
@@ -14,37 +15,19 @@
             <th>Genre</th>
             <th>Publisher</th>
         </tr>
-        <tr th:each="book : ${foundBooks}">
+        <tr>
             <td th:text="${book.ISBN}">-</td>
             <td th:text="${book.title}">-</td>
             <td th:text="${book.author}">-</td>
             <td th:text="${book.genre}">-</td>
             <td th:text="${book.publisher}">-</td>
+            <td>
+                <input type="hidden" th:field="*{book.ISBN}"/>
+                <button type="submit">Invia</button>
+            </td>
         </tr>
     </table>
-
-    <!-- Bottone per mostrare/nascondere il form -->
-    <button onclick="toggleForm()">Mostra/Nascondi Form</button>
-
-    <!-- Form nascosto inizialmente
-    <div id="Form">
-        <form th:action="@{/addBook}" th:object="${foundBooks}, ${libraryMember}" method="post" style="max-width: 500px; margin: 0 auto;">
-            <input type="text" th:field="*{username}" placeholder="Username" required minlength="2" maxlength="45"/>
-            <input type="text" th:field="*{username}" placeholder="Username" required minlength="2" maxlength="45"/>
-            <input type="text" th:field="*{username}" placeholder="Username" required minlength="2" maxlength="45"/>
-            <input type="text" th:field="*{username}" placeholder="Username" required minlength="2" maxlength="45"/>
-            <button type="submit">Invia</button>
-        </form>
-    </div>
-    -->
-<!--
-<script>
-    function toggleForm() {
-        var form = document.getElementById('myForm');
-        form.style.display = form.style.display === 'none' ? 'block' : 'none';
-    }
-</script>
--->
+</form>
 
 </body>
 </html>

@@ -3,6 +3,7 @@ package com.unimib.lybrarysystem.model;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -29,7 +30,6 @@ public class Book {
     @Column(nullable = false, length = 45)
     private String publisher;
 
-
     @ManyToMany
     @JoinTable(
             name = "author_book",
@@ -43,9 +43,20 @@ public class Book {
     @JoinColumn(name = "genre_id", nullable = false)
     private Genre genreList;
 
-    @ManyToMany(mappedBy = "borrowedBooks")
-    private Set<LibraryMember> borrowingMembers = new HashSet<>();
 
+    /*
+    @ManyToOne
+    @JoinColumn(name="book_isbn", nullable = false)
+    private LibraryMember borrowingMembers;
+    */
+
+    @ManyToMany
+    @JoinTable(
+            name = "library_member_book",
+            joinColumns = @JoinColumn(name = "book_isbn"),
+            inverseJoinColumns = @JoinColumn(name = "library_member_id")
+    )
+    private List<LibraryMember> borrowingMembers;
 
     /**
      * Constructs a Book object with specified parameters.
@@ -57,9 +68,9 @@ public class Book {
      * @param publisher         The publisher of the book.
      * @param authors           The set of authors who wrote the book.
      * @param genreList         The genre object associated with the book.
-     * @param borrowingMembers The set of library members who borrowed the book.
+     * @param libraryMember     The library members who borrowed the book.
      */
-    public Book(Integer ISBN, String title, String author, String genre, String publisher, Set<Author> authors, Genre genreList, Set<LibraryMember> borrowingMembers) {
+    public Book(Integer ISBN, String title, String author, String genre, String publisher, Set<Author> authors, Genre genreList, List<LibraryMember> libraryMember) {
         this.ISBN = ISBN;
         this.title = title;
         this.author = author;
@@ -67,7 +78,7 @@ public class Book {
         this.publisher = publisher;
         this.authors = authors;
         this.genreList = genreList;
-        this.borrowingMembers = borrowingMembers;
+        this.borrowingMembers = libraryMember;
     }
 
     /**
@@ -208,7 +219,8 @@ public class Book {
      *
      * @return The set of library members who borrowed the book.
      */
-    public Set<LibraryMember> getBorrowingMembers() {
+
+    public List<LibraryMember> getBorrowingMembers() {
         return borrowingMembers;
     }
 
@@ -217,7 +229,7 @@ public class Book {
      *
      * @param borrowingMembers The set of library members to set for the book.
      */
-    public void setBorrowingMembers(Set<LibraryMember> borrowingMembers) {
+    public void setBorrowingMembers(List<LibraryMember> borrowingMembers) {
         this.borrowingMembers = borrowingMembers;
     }
 
@@ -237,7 +249,6 @@ public class Book {
                 ", publisher='" + publisher + '\'' +
                 ", authors=" + authors +
                 ", genreList=" + genreList +
-                ", borrowingMembers=" + borrowingMembers +
                 '}';
     }
 

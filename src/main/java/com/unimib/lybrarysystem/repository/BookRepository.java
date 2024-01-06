@@ -1,6 +1,7 @@
 package com.unimib.lybrarysystem.repository;
 
 import com.unimib.lybrarysystem.model.Book;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -22,4 +23,14 @@ public interface BookRepository extends CrudRepository<Book, Integer> {
      */
     @Query("SELECT b FROM Book b WHERE b.ISBN = :ISBN AND b.author = :author AND b.title = :title")
     List<Book> findByAttributes(Integer ISBN, String author, String title);
+
+    @Query("SELECT b FROM Book b WHERE b.ISBN = :ISBN")
+    Book findByISBN(Integer ISBN);
+
+    /*
+    @Modifying
+    @Query("UPDATE Book b SET b.libraryMember.id = :id WHERE b.ISBN = :isbn")
+    void addBookToLibraryMember(Integer isbn, Integer id);
+
+     */
 }

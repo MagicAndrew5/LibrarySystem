@@ -2,9 +2,7 @@ package com.unimib.lybrarysystem.model;
 
 import jakarta.persistence.*;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Represents a library member entity in the library system.
@@ -22,19 +20,18 @@ public class LibraryMember {
     private String name;
 
     @Column(nullable = false, length = 45)
-    private String address;
+    private String surname;
 
     @Column(nullable = false, length = 45)
     private String membershipDate;
-
 
     @ManyToMany
     @JoinTable(
             name = "library_member_book",
             joinColumns = @JoinColumn(name = "library_member_id"),
-            inverseJoinColumns = @JoinColumn(name = "book_ISBN")
+            inverseJoinColumns = @JoinColumn(name = "book_isbn")
     )
-    private Set<Book> borrowedBooks = new HashSet<>();
+    private List<Book> borrowedBooks = new ArrayList<>();
 
 
     /**
@@ -42,14 +39,14 @@ public class LibraryMember {
      *
      * @param id            The unique identifier for the library member.
      * @param name          The name of the library member.
-     * @param address       The address of the library member.
+     * @param surname       The surname of the library member.
      * @param membershipDate The membership date of the library member.
      * @param borrowedBooks The set of books borrowed by the library member.
      */
-    public LibraryMember(Integer id, String name, String address, String membershipDate, Set<Book> borrowedBooks) {
+    public LibraryMember(Integer id, String name, String surname, String membershipDate, List<Book> borrowedBooks) {
         this.id = id;
         this.name = name;
-        this.address = address;
+        this.surname = surname;
         this.membershipDate = membershipDate;
         this.borrowedBooks = borrowedBooks;
     }
@@ -100,19 +97,19 @@ public class LibraryMember {
     /**
      * Retrieves the address of the library member.
      *
-     * @return The library member's address.
+     * @return The library member's surname.
      */
-    public String getAddress() {
-        return address;
+    public String getSurname() {
+        return surname;
     }
 
     /**
      * Sets the address of the library member.
      *
-     * @param address The library member's address.
+     * @param surname The library member's surname.
      */
-    public void setAddress(String address) {
-        this.address = address;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     /**
@@ -136,18 +133,18 @@ public class LibraryMember {
     /**
      * Retrieves the set of books borrowed by the library member.
      *
-     * @return The set of borrowed books.
+     * @return The list of borrowed books.
      */
-    public Set<Book> getBorrowedBooks() {
+    public List<Book> getBorrowedBooks() {
         return borrowedBooks;
     }
 
     /**
      * Sets the set of books borrowed by the library member.
      *
-     * @param borrowedBooks The set of borrowed books.
+     * @param borrowedBooks The list of borrowed books.
      */
-    public void setBorrowedBooks(Set<Book> borrowedBooks) {
+    public void setBorrowedBooks(List<Book> borrowedBooks) {
         this.borrowedBooks = borrowedBooks;
     }
 
@@ -161,9 +158,8 @@ public class LibraryMember {
         return "LibraryMember{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
+                ", surname='" + surname + '\'' +
                 ", membershipDate='" + membershipDate + '\'' +
-                ", borrowedBooks=" + borrowedBooks +
                 '}';
     }
 
@@ -177,7 +173,7 @@ public class LibraryMember {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof LibraryMember that)) return false;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(address, that.address) &&
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(surname, that.surname) &&
                 Objects.equals(membershipDate, that.membershipDate) && Objects.equals(borrowedBooks, that.borrowedBooks);
     }
 
@@ -188,6 +184,6 @@ public class LibraryMember {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, address, membershipDate, borrowedBooks);
+        return Objects.hash(id, name, surname, membershipDate, borrowedBooks);
     }
 }

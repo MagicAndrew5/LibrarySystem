@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Controller
@@ -33,6 +34,7 @@ public class LibraryController {
     @GetMapping("/searchBook")
     public String showSearchBookPage(Model model) {
         model.addAttribute("books", new Book());
+        //model.addAttribute("libraryMember", new LibraryMember());
         return "SearchBook";
     }
 
@@ -44,9 +46,15 @@ public class LibraryController {
     }
 
     @GetMapping("/HomePage")
-    public String showHomePage(Model model) {
-        model.addAttribute("user", new User());
-        model.addAttribute("libraryMember", new LibraryMember());
+    public String showHomePage(Model model, User user, LibraryMember libraryMember, Book book) {
+        model.addAttribute("user", user);
+        model.addAttribute("libraryMember", libraryMember);
+        model.addAttribute("books", book);
+
+        System.out.println("HomePage User Controller: " + user);
+        System.out.println("HomePage LibraryMember Controller: " + libraryMember);
+        System.out.println("HomePage Books Controller: " + book);
+
         return "HomePage";
     }
 
@@ -59,11 +67,17 @@ public class LibraryController {
         return "listBookPage";
     }
 
+
     @PostMapping("/checkAccount")
-    public String checkAccount(User user, Model model, RedirectAttributes ra) {
+    public String checkAccount(User user, LibraryMember libraryMember, Model model, RedirectAttributes ra) {
         boolean validCheck = service.checkLoginAccount(user);
         model.addAttribute("user", user);
+        model.addAttribute("libraryMember", libraryMember);
         if(validCheck) {
+
+            System.out.println("User Controller: " + user);
+            System.out.println("LibraryMember Controller: " + libraryMember);
+
             return "redirect:/HomePage";
         } else {
             ra.addFlashAttribute("message", "Username or password are incorrect, please try again");
@@ -71,16 +85,32 @@ public class LibraryController {
         }
     }
 
+
     @PostMapping("/saveAccount")
     public String addNewAccount(User user, LibraryMember libraryMember, Model model, RedirectAttributes ra) {
         boolean validAccount = service.checkSaveAccount(user, libraryMember);
         model.addAttribute("user", user);
         model.addAttribute("libraryMember", libraryMember);
         if(validAccount) {
+
+            System.out.println("User Controller: " + user);
+            System.out.println("LibraryMember Controller: " + libraryMember);
+
             return "redirect:/HomePage";
         } else {
             ra.addFlashAttribute("message", "The user already exists, please try again");
             return "redirect:/registerNewUser";
         }
+    }
+
+    @PostMapping("/addBook")
+    public String addBook(Book book, LibraryMember libraryMember, Model model) {
+
+        service.addLinkBookToLibraryMember(book, libraryMember);
+
+        model.addAttribute("book", book);
+        model.addAttribute("libraryMember", libraryMember);
+
+        return "redirect:/HomePage";
     }
 }

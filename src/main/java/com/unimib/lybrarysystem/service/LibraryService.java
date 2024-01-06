@@ -9,6 +9,7 @@ import com.unimib.lybrarysystem.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -50,8 +51,9 @@ public class LibraryService {
             return false;
         } else {
 
-            // Set the name of the library member to the name of the user
+            // Set the name and surname of the library member to the name and surname of the user
             libraryMember.setName(user.getName());
+            libraryMember.setSurname(user.getSurname());
 
             // Generate random ID and set this value to the libraryMember
             Random random = new Random();
@@ -60,9 +62,6 @@ public class LibraryService {
 
             // Set the membership date to the current date
             libraryMember.setMembershipDate(LocalDate.now().toString());
-
-            //TODO Set address during registration
-            libraryMember.setAddress("Via Merlina 24");
 
             user.setLibraryMember(libraryMember);
 
@@ -79,6 +78,7 @@ public class LibraryService {
      * @param user The user object containing the username and password to be checked.
      * @return true if a user with the provided username and password exists, false otherwise.
      */
+
     public boolean checkLoginAccount(User user) {
         if(userRepo.findByUsernamePassword(user.getUsername(), user.getPassword()) != null) {
             return true;
@@ -86,7 +86,6 @@ public class LibraryService {
             return false;
         }
     }
-
 
     /**
      * Finds books in the repository that match the provided attributes.
@@ -97,5 +96,18 @@ public class LibraryService {
     public List<Book> findByAttributes(Book book) {
         return bookRepo.findByAttributes(book.getISBN(), book.getAuthor(), book.getTitle());
     }
+
+    public void addLinkBookToLibraryMember(Book book, LibraryMember libraryMember) {
+
+        // Retrieve the actual book from the database
+        Book actualBook = bookRepo.findByISBN(book.getISBN());
+        System.out.println("Book Service: " + actualBook);
+        System.out.println("FINO QUI TUTTO BENE");
+
+        //List<Book> bookList = new ArrayList<>();
+        //bookList.add(book);
+        //libraryMember.setBorrowedBooks(bookList);
+    }
+
 
 }

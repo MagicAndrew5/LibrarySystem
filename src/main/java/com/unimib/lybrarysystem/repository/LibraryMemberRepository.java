@@ -1,6 +1,8 @@
 package com.unimib.lybrarysystem.repository;
 
 import com.unimib.lybrarysystem.model.LibraryMember;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -8,4 +10,10 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface LibraryMemberRepository extends CrudRepository<LibraryMember, Integer> {
 
+    /*
+    @Modifying
+    @Query("UPDATE LibraryMember lm SET lm.borrowedBooks.ISBN = :isbn WHERE lm.id = :id")
+    void addLibraryMemberToBook(Integer id, Integer isbn);
+
+     */
 }
