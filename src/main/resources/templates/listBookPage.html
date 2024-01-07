@@ -1,26 +1,65 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" th:href="@{/basicStyle.css}"/>
     <title>List Book Page</title>
 </head>
-<body>
-<table>
-    <tr>
-        <th>ISBN</th>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Genre</th>
-        <th>Publisher</th>
-    </tr>
-    <tr th:each="book : ${foundBooks}">
-        <td th:text="${book.ISBN}">-</td>
-        <td th:text="${book.title}">-</td>
-        <td th:text="${book.author}">-</td>
-        <td th:text="${book.genre}">-</td>
-        <td th:text="${book.publisher}">-</td>
-    </tr>
-</table>
+    <body>
 
-</body>
+    <div class="backgroundListBook">
+        <div class="container">
+            <div class="main">
+                <h1> List Page</h1>
+                <p class="btn-primary">In this page you can find the result of your research. <br> Press "Add" to upload the book to your personal list.</p>
+            </div>
+        </div>
+
+            <div class="Form-container">
+                <div class="FormListBook">
+                    <table>
+                        <tr>
+                            <th class="text-ListPage">ISBN</th>
+                            <th class="text-ListPage">Title</th>
+                            <th class="text-ListPage">Author</th>
+                            <th class="text-ListPage">Genre</th>
+                            <th class="text-ListPage">Publisher</th>
+                        </tr>
+
+                        <!--  <tr class="text-ListPage" th:each="book : ${foundBooks}">
+                            <td th:text="${book.ISBN}">-</td>
+                            <td th:text="${book.title}">-</td>
+                            <td th:text="${book.author}">-</td>
+                            <td th:text="${book.genre}">-</td>
+                            <td th:text="${book.publisher}">-</td>
+                            -->
+
+                        <tr class="text-ListPage" th:each="book : ${foundBooks}">
+                            <td th:text="${book.ISBN}">-</td>
+                            <td th:text="${book.title}">-</td>
+                            <td th:text="${book.author}">-</td>
+                            <td th:text="${book.genre}">-</td>
+                            <td th:text="${book.publisher}">-</td>
+                            <td></td>
+                            <td>  <input class="cool-button" name="submit" th:type="submit" value="Add" /></td>
+                        </tr>
+
+
+                    </table>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+    </body>
 </html>
+

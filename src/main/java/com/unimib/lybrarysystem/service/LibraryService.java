@@ -2,6 +2,7 @@ package com.unimib.lybrarysystem.service;
 
 import com.unimib.lybrarysystem.model.Book;
 import com.unimib.lybrarysystem.model.User;
+import com.unimib.lybrarysystem.repository.BookRepository;
 import com.unimib.lybrarysystem.repository.LibraryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +14,12 @@ public class LibraryService {
 
     @Autowired
     private LibraryRepository repo;
+    @Autowired
+    private BookRepository bookRepo;
 
     public boolean checkSave(User user) {
         User existingUser = repo.findByEmail(user.getEmail());
-        if(existingUser != null) {
+        if (existingUser != null) {
             return false;
         } else {
             repo.save(user);
@@ -25,7 +28,7 @@ public class LibraryService {
     }
 
     public boolean checkLogin(User user) {
-        if(repo.findByUsernamePassword(user.getUsername(), user.getPassword()) != null) {
+        if (repo.findByUsernamePassword(user.getUsername(), user.getPassword()) != null) {
             return true;
         } else {
             return false;
@@ -35,4 +38,15 @@ public class LibraryService {
     public List<Book> findByAttributes(Book book) {
         return repo.findByAttributes(book.getISBN(), book.getAuthor(), book.getTitle());
     }
+
+    public List<Book> findAllBooks() {
+        return bookRepo.findAllBooks();
+    }
+
+/*
+    public List<Book> getAllBooks() {
+        return bookRepo.getAllBooks();
+    }
+    */
+
 }
