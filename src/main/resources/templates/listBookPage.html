@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -18,48 +17,30 @@
 
             <div class="Form-container">
                 <div class="FormListBook">
-                    <table>
-                        <tr>
-                            <th class="text-ListPage">ISBN</th>
-                            <th class="text-ListPage">Title</th>
-                            <th class="text-ListPage">Author</th>
-                            <th class="text-ListPage">Genre</th>
-                            <th class="text-ListPage">Publisher</th>
-                        </tr>
-
-                        <!--  <tr class="text-ListPage" th:each="book : ${foundBooks}">
-                            <td th:text="${book.ISBN}">-</td>
-                            <td th:text="${book.title}">-</td>
-                            <td th:text="${book.author}">-</td>
-                            <td th:text="${book.genre}">-</td>
-                            <td th:text="${book.publisher}">-</td>
-                            -->
-
-                        <tr class="text-ListPage" th:each="book : ${foundBooks}">
-                            <td th:text="${book.ISBN}">-</td>
-                            <td th:text="${book.title}">-</td>
-                            <td th:text="${book.author}">-</td>
-                            <td th:text="${book.genre}">-</td>
-                            <td th:text="${book.publisher}">-</td>
-                            <td></td>
-                            <td>  <input class="cool-button" name="submit" th:type="submit" value="Add" /></td>
-                        </tr>
-
-
-                    </table>
-
-
+                    <form th:action="@{/addBook}" method="post" th:each="book : ${foundBooks}">
+                        <table>
+                            <tr>
+                                <th class="text-ListPage">ISBN</th>
+                                <th class="text-ListPage">Title</th>
+                                <th class="text-ListPage">Author</th>
+                                <th class="text-ListPage">Genre</th>
+                                <th class="text-ListPage">Publisher</th>
+                            </tr>
+                            <tr>
+                                <td th:text="${book.ISBN}">-</td>
+                                <td th:text="${book.title}">-</td>
+                                <td th:text="${book.author}">-</td>
+                                <td th:text="${book.genre}">-</td>
+                                <td th:text="${book.publisher}">-</td>
+                                <td>
+                                    <input type="hidden" th:field="*{book.ISBN}"/>
+                                    <button type="submit">Invia</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
                 </div>
             </div>
-
-        </div>
     </div>
-
-
-
-
-
-
     </body>
 </html>
-
