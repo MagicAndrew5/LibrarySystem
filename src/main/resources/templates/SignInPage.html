@@ -4,7 +4,7 @@
 
     <link type="text/css" rel="stylesheet" th:href="@{/basicStyle.css}"/>
     <meta charset="utf-8">
-    <title>Register</title>
+    <title>Sign in</title>
 </head>
 
 <body>
@@ -21,8 +21,8 @@
             </div>
         </div>
 
-        <div class="Form">
-            <h1>Fill in the form below</h1>
+        <div class="Form4">
+            <h1 class="centered-text">Fill in the form below</h1>
             <form th:action="@{/checkAccount}" method="post" th:object="${user}" style="max-width: 500px; margin: 0 auto;">
                 <input type="text" th:field="*{username}" placeholder="Username" required minlength="2" maxlength="45"/>
                 <input type="password" th:field="*{password}" placeholder="Password" required minlength="2" maxlength="45" />
@@ -33,8 +33,8 @@
                 </div>
 
             </form>
-            <p> <b>Not registered yet?</b>
-                <a th:href="@{/registerNewUser}"><b>Register Here</b></a>
+            <p class="text-SignIn"> <b>Not registered yet?</b>
+                <a class="text-SignInTh" th:href="@{/registerNewUser}"><b>Register Here</b></a>
             </p>
         </div>
 

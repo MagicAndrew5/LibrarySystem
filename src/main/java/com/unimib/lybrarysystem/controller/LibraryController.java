@@ -2,6 +2,7 @@ package com.unimib.lybrarysystem.controller;
 
 import com.unimib.lybrarysystem.model.Book;
 import com.unimib.lybrarysystem.model.User;
+import com.unimib.lybrarysystem.repository.BookRepository;
 import com.unimib.lybrarysystem.service.LibraryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,8 @@ public class LibraryController {
 
     @Autowired
     private LibraryService service;
+    @Autowired
+    private BookRepository bookService;
 
     @GetMapping("/")
     public String showStartPage() {
@@ -44,6 +47,12 @@ public class LibraryController {
     @GetMapping("/HomePage")
     public String showHomePage(Model model) {
         model.addAttribute("user", new User());
+
+        List<Book> listBooks = service.findAllBooks();
+        model.addAttribute("listBooks", listBooks);
+        for (int i = 0; i < listBooks.size(); i++){
+            System.out.println(listBooks.get(i).toString());
+        }
         return "HomePage";
     }
 
@@ -54,11 +63,25 @@ public class LibraryController {
         return "listBookPage";
     }
 
+  /*  //TODO
+    @GetMapping("/listBookPage")
+    public String getAllBooks(Model model) {
+        List<Book> listBooks = bookService.getAllBooks();
+        model.addAttribute("listBooks", listBooks);
+        return "HomePage"; //
+    }
+    */
+
+
+
     @PostMapping("/checkAccount")
     public String checkAccount(User user, Model model, RedirectAttributes ra) {
         boolean validCheck = service.checkLogin(user);
         model.addAttribute("user", user);
+
         if(validCheck) {
+
+
             return "redirect:/HomePage";
         } else {
             ra.addFlashAttribute("message", "Username or password are incorrect, please try again");

@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <div class="backgroundregistration">
+    <div class="backgroundRegistration">
 
         <div th:if="${message}" class="alert alert-danger">
             [[${message}]]
@@ -34,7 +34,7 @@
                 <input type="text" th:field="*{phoneNumber}" placeholder="Mobile" required minlength="2" maxlength="10" />
                 <input type="text" th:field="*{city}" placeholder="City" required minlength="2" maxlength="45" />
                 <div class="text-center">
-                    <button type="submit" name="Submit">Register</button>
+                    <button class="cool-button" type="submit" name="Submit">Register</button>
                 </div>
             </form>
         </div>
