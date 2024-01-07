@@ -116,4 +116,8 @@ public class LibraryService {
         // Retrieve the actual book from the database
         return bookRepo.findByISBN(book.getISBN());
     }
+
+    public List<Book> findAllBooks() {
+        return bookRepo.findAllBooks();
+    }
 }

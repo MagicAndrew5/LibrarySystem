@@ -77,6 +77,12 @@ public class LibraryController {
         model.addAttribute("libraryMember", actualLibraryMember);
         model.addAttribute("books", actualBook);
 
+        List<Book> listBooks = service.findAllBooks();
+        model.addAttribute("listBooks", listBooks);
+        for (int i = 0; i < listBooks.size(); i++){
+            System.out.println(listBooks.get(i).toString());
+        }
+
         return "HomePage";
     }
 

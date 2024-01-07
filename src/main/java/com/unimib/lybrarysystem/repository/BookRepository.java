@@ -33,4 +33,10 @@ public interface BookRepository extends CrudRepository<Book, Integer> {
     void addBookToLibraryMember(Integer isbn, Integer id);
 
      */
+    @Query("SELECT b from Book b")
+    List<Book> findAllBooks();
 }
+
+
+
+

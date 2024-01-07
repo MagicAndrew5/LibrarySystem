@@ -9,35 +9,51 @@ html, body
 {
     background: url('images/StartPage.png') no-repeat center center fixed;
     background-size: cover;
-    height: 1080px;
+   /* height: 1300px;*/
+    height: 100vh
 }
 
 /* Background image for menu, making sure no repeats */
 .backgroundSign
 {
-    background: url('images/SignInPic.jpg') no-repeat center center fixed;
+    background: url('images/SignInPic2.jpg') no-repeat center center fixed;
     background-size: cover;
-    height: 1080px;
+    height: 100vh
 }
 
 /* Background image for menu, making sure no repeats */
-.backgroundregistration
+.backgroundRegistration
 {
     background: url('images/RegistrationPic.jpg') no-repeat center center fixed;
     background-size: cover;
-    height: 1080px;
+    height: 100vh
 }
 
 .backgroundSearchBook
 {
-    background: url('images/SearchPage.jpg') no-repeat center center fixed;
+    background: url('images/SearchPage2.jpg') no-repeat center center fixed;
     background-size: cover;
-    height: 1080px;
+    height: 100vh
+}
+
+.backgroundHomePage
+{
+    background: url('images/HomePage.jpg') no-repeat center center ;
+    background-size: cover;
+    height: 400px;
+}
+
+.backgroundListBook
+{
+    background: url('images/ListbookPageImage.jpg') no-repeat center center ;
+    background-size: cover;
+    height: 100vh
+
 }
 /* Perfecting the size of the 3 buttons down */
 .container
 {
-    max-width: 940px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 10px;
 }
@@ -118,7 +134,7 @@ html, body
 /* The three bottons */
 .btn-default
 {
-    border: 1px solid #333;
+    border: 1px solid #ffffff;
     color: #fff;
     font-family: 'Raleway', sans-serif;
     font-weight: 600;
@@ -132,15 +148,61 @@ html, body
     border-radius: 5px;
 }
 
+.container-homePage {
+    position: absolute;
+    top: 30px; /* Distanza dal top */
+    right: 50px; /* Distanza dal right */
+}
+
 .col
 {
     color: #ffffff;
-    float: left;
+    float: none;
     width: 50%;
     font-family: 'Raleway', sans-serif;
     text-align: center;
+    margin: 0 auto;
 }
 
+.ion-icon{
+    font-size: 64px;
+    color: #38ea10;
+}
+.centered-text {
+    text-align: center;
+    color: #ffffff;
+    font-family: 'Raleway', sans-serif;
+}
+
+.text-HomePage{
+    text-align: left;
+    font-family: 'Raleway', sans-serif;
+    margin-left: 10px;
+}
+.text-SignIn{
+    text-align: left;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    margin-left: 10px;
+}
+.text-SignInTh{
+
+    color: #4bff04;
+    font-family: 'Raleway', sans-serif;
+    margin-left: 10px;
+}
+.text-ListPage{
+    text-align: center;
+    color: rgb(255, 255, 255);
+    font-family: 'Raleway', sans-serif;
+    margin-left: 10px;
+}
+.text-ListPage2{
+    text-align: center;
+    color: rgb(255, 255, 255);
+    font-family: 'Raleway', sans-serif;
+    margin-left: 10px;
+}
 /* Lining */
 .clearfix
 {
@@ -156,6 +218,50 @@ html, body
     margin: 50px auto;
 }
 
+.Form2 {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: auto;
+    width: 70%;
+    padding: 10px;
+}
+
+.Form3 {
+    background-color: rgba(255, 255, 255, 0.3); /* Imposta l'opacità del colore di sfondo */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 150px auto;
+}
+
+.Form4 {
+    background-color: rgba(255, 255, 255, 0.3); /* Imposta l'opacità del colore di sfondo */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 180px auto;
+}
+
+
+.Form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+}
+
+.FormListBook {
+    background-color: rgba(255, 255, 255, 0.3); /* Imposta l'opacità del colore di sfondo */
+    padding: 30px;
+    border-radius: 10px;
+    border-color: black;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 50px auto;
+}
 .Form h1 {
     color: #ffffff; /* White text color */
     font-size: 30px; /* Smaller font size */
@@ -182,11 +288,11 @@ form input[type="text"], form input[type="password"] {
     border: none;
 }
 
-.loginheader
+.loginHeader
 {
     font-family: 'Raleway', sans-serif;
     text-align: center;
-
+    padding: 40px;
 }
 
 /* da capire se sono da usare o meno*/
@@ -200,4 +306,17 @@ form input[type="text"], form input[type="password"] {
     display: flex;
     flex-direction: column;
     max-width: 300px; /* Adjust as needed */
+}
+.carousel-cell{
+    height: 280px;
+    width: 250px;
+   /* background-color: rgba(171, 66, 0, 0.9);*/
+    line-height: 270px;
+    text-align: center;
+    margin-right: 40px;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    background: url('images/BookImage.jpg') no-repeat center center;
+
+
 }
