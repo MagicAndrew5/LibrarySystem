@@ -136,8 +136,7 @@ public class LibraryController {
     public String showDetailBooks(Model model, @PathVariable("isbn") Integer isbn) {
         Book bookRetrieve = service.findBookByISBN(isbn);
         model.addAttribute("bookDetails", bookRetrieve);
-        //Todo: cambiare il file HTML di destinazione
-        return "prova";
+        return "BookInformation";
     }
 
     // ------------------- POST METHODS -------------------

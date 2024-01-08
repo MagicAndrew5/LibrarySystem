@@ -7,6 +7,7 @@ import com.unimib.lybrarysystem.repository.BookRepository;
 import com.unimib.lybrarysystem.repository.LibraryMemberRepository;
 import com.unimib.lybrarysystem.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
