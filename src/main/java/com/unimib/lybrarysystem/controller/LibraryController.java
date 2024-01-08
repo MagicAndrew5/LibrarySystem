@@ -148,19 +148,33 @@ public class LibraryController {
      * @return The name of the book list page view.
      */
     @PostMapping("/searchBooks")
-    public String showListBook(Book book, Model model, RedirectAttributes ra) {
+    public String showListBook(@RequestParam(required = false) boolean ebooksOnly, Book book, Model model, RedirectAttributes ra) {
 
-        List<Book> foundBooks = service.findBookByAttributes(book);
-        //System.out.println("foundBooks Controller Info: " + foundBooks);
-        model.addAttribute("foundBooks", foundBooks);
-        model.addAttribute("books", new Book());
+        if(ebooksOnly) {
+            List<Book> foundBooks = service.findEBookByAttributes(book);
+            model.addAttribute("foundBooks", foundBooks);
+            model.addAttribute("books", new Book());
 
-        if(foundBooks.isEmpty()) {
-            ra.addFlashAttribute("message", "Your search result generated no matches, please try again");
-            return "redirect:/searchBook";
+            if(foundBooks.isEmpty()) {
+                ra.addFlashAttribute("message", "Your search result generated no matches, please try again");
+                return "redirect:/searchBook";
+            }
+            else {
+                return "listBookPage";
+            }
         }
         else {
-            return "listBookPage";
+            List<Book> foundBooks = service.findBookByAttributes(book);
+            model.addAttribute("foundBooks", foundBooks);
+            model.addAttribute("books", new Book());
+
+            if(foundBooks.isEmpty()) {
+                ra.addFlashAttribute("message", "Your search result generated no matches, please try again");
+                return "redirect:/searchBook";
+            }
+            else {
+                return "listBookPage";
+            }
         }
     }
 

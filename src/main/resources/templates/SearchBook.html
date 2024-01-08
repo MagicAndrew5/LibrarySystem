@@ -28,6 +28,10 @@
                     <input type="text" th:field="*{ISBN}" placeholder="ISBN" id="ISBN" />
                     <input type="text" th:field="*{author}" placeholder="Author" id="author" />
                     <input type="text" th:field="*{title}" placeholder="Title" id="title" />
+
+                    <input type="checkbox" id="ebooksOnly" name="ebooksOnly" />
+                    <label for="ebooksOnly">Search EBooks only</label>
+
                     <input class="cool-button" name="submit" th:type="submit" value="Search" />
 
                     <div th:if="${message}" id="message-box" class="alert alert-danger">

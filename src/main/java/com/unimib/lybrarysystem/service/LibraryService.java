@@ -174,8 +174,14 @@ public class LibraryService {
         return bookRepo.findBookByAttributes(book.getISBN(), book.getAuthor(), book.getTitle());
     }
 
-
-
+    /**
+     * Finds all ebooks in the repository.
+     *
+     * @return A list of all ebooks in the repository.
+     */
+    public List<Book> findEBookByAttributes(Book book) {
+        return bookRepo.findEBookByAttributes(book.getISBN(), book.getAuthor(), book.getTitle());
+    }
 
     /**
      * Finds books in the repository that are currently borrowed by the provided library member.

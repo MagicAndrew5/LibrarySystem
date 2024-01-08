@@ -12,6 +12,8 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "books")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "book_type")
 public class Book {
 
     @Id

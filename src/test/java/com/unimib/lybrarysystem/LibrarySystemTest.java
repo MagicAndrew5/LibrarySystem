@@ -2,6 +2,7 @@ package com.unimib.lybrarysystem;
 
 import com.unimib.lybrarysystem.model.Author;
 import com.unimib.lybrarysystem.model.Book;
+import com.unimib.lybrarysystem.model.EBook;
 import com.unimib.lybrarysystem.model.Genre;
 import com.unimib.lybrarysystem.repository.AuthorRepository;
 import com.unimib.lybrarysystem.repository.BookRepository;
@@ -147,6 +148,41 @@ public class LibrarySystemTest {
     public void testAddAuthorBookRelatioship() {
 
         Genre genre = new Genre();
+        genre.setName("Horror");
+        genre.setId(2);
+
+        genreRepo.save(genre);
+
+        Author author = new Author();
+
+        author.setName("Alberto");
+        author.setSurname("Blu");
+        author.setNationality("Italian");
+        author.setBirthDate("23/11/1999");
+
+        Book book = new Book();
+
+        book.setISBN(123456789);
+        book.setAuthor("Alberto Blu");
+        book.setPublisher("Mondadori");
+        book.setTitle("Il libro degli incubi");
+        book.setGenre("Fantasy");
+        book.setGenreList(genre);
+
+        book.getAuthors().add(author);
+
+        authorRepo.save(author);
+        bookRepo.save(book);
+    }
+
+    /**
+     * Test method for adding an author-Ebook relationship.
+     * It tests the creation of a new author and Ebook, and the establishment of a relationship between them.
+     */
+    @Test
+    public void testAddAuthorEBookRelatioship() {
+
+        Genre genre = new Genre();
         genre.setName("Giallo");
         genre.setId(3);
 
@@ -159,7 +195,7 @@ public class LibrarySystemTest {
         author.setNationality("Spanish");
         author.setBirthDate("05/11/2000");
 
-        Book book = new Book();
+        EBook book = new EBook();
 
         book.setISBN(123456789);
         book.setAuthor("Andrea Verde");
@@ -167,6 +203,9 @@ public class LibrarySystemTest {
         book.setTitle("Il libro");
         book.setGenre("Fantasy");
         book.setGenreList(genre);
+
+        book.setFormat("PDF");
+        book.setFileSizeMB(10);
 
         book.getAuthors().add(author);
 

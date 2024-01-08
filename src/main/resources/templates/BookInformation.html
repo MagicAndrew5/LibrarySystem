@@ -24,7 +24,7 @@
     </div>
 
     <div class="FormListBook">
-        <form th:action="@{/removeBook}" method="post" th:each="bookDetails : ${bookDetails}">
+        <form th:action="@{'/removeBook/' + ${bookDetails.ISBN}}" method="post" th:each="bookDetails : ${bookDetails}">
             <table>
                 <tr>
                     <th class="text-ListPage">ISBN</th>
@@ -45,6 +45,9 @@
                 <tr>
                     <th class="text-ListPage">Publisher</th>
                     <td th:text="${bookDetails.publisher}">-</td>
+                </tr>
+                <tr>
+                    <input class="cool-button" name="submit" th:type="submit" value="Remove" />
                 </tr>
             </table>
         </form>
