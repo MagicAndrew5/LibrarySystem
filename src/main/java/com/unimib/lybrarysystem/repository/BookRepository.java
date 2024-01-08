@@ -5,6 +5,7 @@ import com.unimib.lybrarysystem.model.LibraryMember;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -22,9 +23,14 @@ public interface BookRepository extends CrudRepository<Book, Integer> {
      * @param title The title of the book to be matched.
      * @return A list of books that match the provided ISBN, author, and title.
      */
+    /*
     @Query("SELECT b FROM Book b WHERE b.ISBN = :ISBN AND b.author = :author AND b.title = :title")
     List<Book> findBookByAttributes(Integer ISBN, String author, String title);
 
+     */
+
+    @Query("SELECT b FROM Book b WHERE (:ISBN IS NULL OR b.ISBN = :ISBN) AND (:author IS NULL OR b.author = :author) AND (:title IS NULL OR b.title = :title)")
+    List<Book> findBookByAttributes(@Param("ISBN") Integer ISBN, @Param("author") String author, @Param("title") String title);
     /**
      * Finds a book in the repository that matches the provided ISBN.
      *
