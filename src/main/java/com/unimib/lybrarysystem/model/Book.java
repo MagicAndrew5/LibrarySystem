@@ -43,17 +43,10 @@ public class Book {
     @JoinColumn(name = "genre_id", nullable = false)
     private Genre genreList;
 
-
-    /*
-    @ManyToOne
-    @JoinColumn(name="book_isbn", nullable = false)
-    private LibraryMember borrowingMembers;
-    */
-
     @ManyToMany
     @JoinTable(
             name = "library_member_book",
-            joinColumns = @JoinColumn(name = "book_isbn"),
+            joinColumns = @JoinColumn(name = "isbn"),
             inverseJoinColumns = @JoinColumn(name = "library_member_id")
     )
     private List<LibraryMember> borrowingMembers;

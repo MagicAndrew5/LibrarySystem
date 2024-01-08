@@ -25,12 +25,18 @@ public class LibraryMember {
     @Column(nullable = false, length = 45)
     private String membershipDate;
 
+    /*
     @ManyToMany
     @JoinTable(
             name = "library_member_book",
             joinColumns = @JoinColumn(name = "library_member_id"),
             inverseJoinColumns = @JoinColumn(name = "book_isbn")
     )
+    private List<Book> borrowedBooks = new ArrayList<>();
+
+     */
+
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "borrowingMembers")
     private List<Book> borrowedBooks = new ArrayList<>();
 
 
@@ -149,6 +155,17 @@ public class LibraryMember {
     }
 
     /**
+     * Removes a book from the list of books borrowed by this library member.
+     * Also removes this library member from the list of library members who borrowed the book.
+     *
+     * @param book The book to be removed from the borrowed books list.
+     */
+    public void removeBorrowedBook(Book book) {
+        borrowedBooks.remove(book);
+        book.getBorrowingMembers().remove(this);
+    }
+
+    /**
      * Returns a string representation of the LibraryMember object.
      *
      * @return A string representation of the LibraryMember.
@@ -186,4 +203,6 @@ public class LibraryMember {
     public int hashCode() {
         return Objects.hash(id, name, surname, membershipDate, borrowedBooks);
     }
+
+
 }
