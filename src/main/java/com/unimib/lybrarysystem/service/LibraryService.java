@@ -73,7 +73,6 @@ public class LibraryService {
         }
     }
 
-
     /**
      * Checks if the provided user's credentials match any existing user in the system.
      *
@@ -99,17 +98,8 @@ public class LibraryService {
     public void addLinkBookToLibraryMember(Book book, LibraryMember libraryMember) {
         // Relationship between book and library member
         book.getBorrowingMembers().add(libraryMember);
+        book.getHistorianMembers().add(libraryMember);
         bookRepo.save(book);
-    }
-
-    /**
-     * Finds books in the repository that match the provided attributes.
-     *
-     * @param book The book object containing the ISBN, author, and title to be matched.
-     * @return A list of books that match the provided attributes.
-     */
-    public List<Book> findByAttributes(Book book) {
-        return bookRepo.findByAttributes(book.getISBN(), book.getAuthor(), book.getTitle());
     }
 
     /**
@@ -172,6 +162,16 @@ public class LibraryService {
      */
     public List<Book> findAllBooks() {
         return bookRepo.findAllBooks();
+    }
+
+    /**
+     * Finds books in the repository that match the provided attributes.
+     *
+     * @param book The book object containing the ISBN, author, and title to be matched.
+     * @return A list of books that match the provided attributes.
+     */
+    public List<Book> findBookByAttributes(Book book) {
+        return bookRepo.findBookByAttributes(book.getISBN(), book.getAuthor(), book.getTitle());
     }
 
     /**

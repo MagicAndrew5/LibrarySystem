@@ -107,6 +107,14 @@ public class LibraryController {
         return "SearchBook";
     }
 
+    /**
+     * Handles the GET request for the book details page.
+     * Retrieves a book from the repository that matches the provided ISBN and adds it to the model.
+     *
+     * @param model The model to add attributes to.
+     * @param isbn The ISBN of the book to be retrieved.
+     * @return The name of the book details page view.
+     */
     @GetMapping("/detailBooks/{isbn}")
     public String detailBooks(Model model, @PathVariable("isbn") Integer isbn) {
         Book bookRetrieve = service.findBookByISBN(isbn);
@@ -124,7 +132,7 @@ public class LibraryController {
      */
     @PostMapping("/searchBooks")
     public String listBookPage(Book book, Model model) {
-        List<Book> foundBooks = service.findByAttributes(book);
+        List<Book> foundBooks = service.findBookByAttributes(book);
         model.addAttribute("foundBooks", foundBooks);
         return "listBookPage";
     }

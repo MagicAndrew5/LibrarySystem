@@ -23,7 +23,7 @@ public interface BookRepository extends CrudRepository<Book, Integer> {
      * @return A list of books that match the provided ISBN, author, and title.
      */
     @Query("SELECT b FROM Book b WHERE b.ISBN = :ISBN AND b.author = :author AND b.title = :title")
-    List<Book> findByAttributes(Integer ISBN, String author, String title);
+    List<Book> findBookByAttributes(Integer ISBN, String author, String title);
 
     /**
      * Finds a book in the repository that matches the provided ISBN.
@@ -57,7 +57,7 @@ public interface BookRepository extends CrudRepository<Book, Integer> {
      * @param libraryMember The library member whose historical borrowed books are to be found.
      * @return A list of books that were previously borrowed by the provided library member.
      */
-    @Query("SELECT b FROM Book b WHERE :libraryMember MEMBER OF b.borrowingMembers")
+    @Query("SELECT b FROM Book b WHERE :libraryMember MEMBER OF b.historianMembers")
     List<Book> findHistoricalBookByLibraryMember(LibraryMember libraryMember);
 
 }

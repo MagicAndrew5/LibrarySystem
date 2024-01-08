@@ -25,36 +25,30 @@ public class LibraryMember {
     @Column(nullable = false, length = 45)
     private String membershipDate;
 
-    /*
-    @ManyToMany
-    @JoinTable(
-            name = "library_member_book",
-            joinColumns = @JoinColumn(name = "library_member_id"),
-            inverseJoinColumns = @JoinColumn(name = "book_isbn")
-    )
-    private List<Book> borrowedBooks = new ArrayList<>();
-
-     */
-
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "borrowingMembers")
     private List<Book> borrowedBooks = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "historianMembers")
+    private List<Book> historianBooks = new ArrayList<>();
 
 
     /**
      * Constructs a LibraryMember object with specified parameters.
      *
-     * @param id            The unique identifier for the library member.
-     * @param name          The name of the library member.
-     * @param surname       The surname of the library member.
+     * @param id             The unique identifier for the library member.
+     * @param name           The name of the library member.
+     * @param surname        The surname of the library member.
      * @param membershipDate The membership date of the library member.
-     * @param borrowedBooks The set of books borrowed by the library member.
+     * @param borrowedBooks  The set of books borrowed by the library member.
+     * @param historianBooks The set of books historian borrowed by the library member.
      */
-    public LibraryMember(Integer id, String name, String surname, String membershipDate, List<Book> borrowedBooks) {
+    public LibraryMember(Integer id, String name, String surname, String membershipDate, List<Book> borrowedBooks, List<Book> historianBooks) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.membershipDate = membershipDate;
         this.borrowedBooks = borrowedBooks;
+        this.historianBooks = historianBooks;
     }
 
     /**
@@ -137,7 +131,7 @@ public class LibraryMember {
     }
 
     /**
-     * Retrieves the set of books borrowed by the library member.
+     * Retrieves the list of books borrowed by the library member.
      *
      * @return The list of borrowed books.
      */
@@ -146,12 +140,30 @@ public class LibraryMember {
     }
 
     /**
-     * Sets the set of books borrowed by the library member.
+     * Sets the list of books borrowed by the library member.
      *
      * @param borrowedBooks The list of borrowed books.
      */
     public void setBorrowedBooks(List<Book> borrowedBooks) {
         this.borrowedBooks = borrowedBooks;
+    }
+
+    /**
+     * Retrieves the list of books historian borrowed by the library member.
+     *
+     * @return The list of historian borrowed books.
+     */
+    public List<Book> getHistorianBooks() {
+        return historianBooks;
+    }
+
+    /**
+     * Sets the list of books historian borrowed by the library member.
+     *
+     * @param historianBooks The list of historian borrowed books.
+     */
+    public void setHistorianBooks(List<Book> historianBooks) {
+        this.historianBooks = historianBooks;
     }
 
     /**
@@ -191,7 +203,8 @@ public class LibraryMember {
         if (this == o) return true;
         if (!(o instanceof LibraryMember that)) return false;
         return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(surname, that.surname) &&
-                Objects.equals(membershipDate, that.membershipDate) && Objects.equals(borrowedBooks, that.borrowedBooks);
+                Objects.equals(membershipDate, that.membershipDate) && Objects.equals(borrowedBooks, that.borrowedBooks) &&
+                Objects.equals(historianBooks, that.historianBooks);
     }
 
     /**
@@ -201,8 +214,6 @@ public class LibraryMember {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, membershipDate, borrowedBooks);
+        return Objects.hash(id, name, surname, membershipDate, borrowedBooks, historianBooks);
     }
-
-
 }
