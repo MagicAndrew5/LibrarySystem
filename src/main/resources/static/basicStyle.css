@@ -120,6 +120,13 @@ html, body
     border-radius: 25px;
 }
 
+.btn-searchEbook {
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+}
+
 .cool-button {
     padding: 10px 20px;
     font-size: 16px;
@@ -130,6 +137,31 @@ html, body
     transition: background-color 0.3s ease;
     cursor: pointer;
 }
+
+.cool-button-bookinformation {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #074709;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    margin-left: 30px;
+}
+
+.cool-button-searchbook {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #074709;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    margin-left: 170px;
+}
+
 
 /* The three bottons */
 .btn-default
@@ -265,6 +297,7 @@ html, body
     justify-content: center;
     align-items: center;
     height: 30vh;
+    margin-top: 100px;
 }
 
 .FormListBook {
@@ -276,7 +309,6 @@ html, body
     max-width: 500px;
     margin-left: 50px;
     flex: 1;
-
 }
 .Form h1 {
     color: #ffffff; /* White text color */

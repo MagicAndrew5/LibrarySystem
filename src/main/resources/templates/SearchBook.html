@@ -30,9 +30,10 @@
                     <input type="text" th:field="*{title}" placeholder="Title" id="title" />
 
                     <input type="checkbox" id="ebooksOnly" name="ebooksOnly" />
-                    <label for="ebooksOnly">Search EBooks only</label>
+                    <label class="btn-searchEbook" for="ebooksOnly">Search EBooks only</label>
 
-                    <input class="cool-button" name="submit" th:type="submit" value="Search" />
+                    <input class="cool-button-searchbook" name="submit" th:type="submit" value="Search" />
+
 
                     <div th:if="${message}" id="message-box" class="alert alert-danger">
                         [[${message}]]
