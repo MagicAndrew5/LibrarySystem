@@ -5,6 +5,7 @@ import com.unimib.lybrarysystem.model.LibraryMember;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -22,8 +23,8 @@ public interface BookRepository extends CrudRepository<Book, Integer> {
      * @param title The title of the book to be matched.
      * @return A list of books that match the provided ISBN, author, and title.
      */
-    @Query("SELECT b FROM Book b WHERE b.ISBN = :ISBN AND b.author = :author AND b.title = :title")
-    List<Book> findBookByAttributes(Integer ISBN, String author, String title);
+    @Query("SELECT b FROM Book b WHERE (:ISBN IS NULL OR b.ISBN = :ISBN) AND (:author IS NULL OR b.author = :author) AND (:title IS NULL OR b.title = :title)")
+    List<Book> findBookByAttributes(@Param("ISBN") Integer ISBN, @Param("author") String author, @Param("title") String title);
 
     /**
      * Finds a book in the repository that matches the provided ISBN.
@@ -60,10 +61,27 @@ public interface BookRepository extends CrudRepository<Book, Integer> {
     @Query("SELECT b FROM Book b WHERE :libraryMember MEMBER OF b.historianMembers")
     List<Book> findHistoricalBookByLibraryMember(LibraryMember libraryMember);
 
-
+    /**
+     * Finds books in the repository that match the provided publisher and author's nationality.
+     *
+     * @param publisher The publisher of the books to be retrieved.
+     * @param nationality The nationality of the author of the books to be retrieved.
+     * @return A list of books that match the provided publisher and author's nationality.
+     */
     @Query("SELECT b FROM Book b JOIN b.authors a WHERE b.publisher = :publisher AND a.nationality = :nationality")
     List<Book> findBooksByPublisherAndAuthorNationality(String publisher, String nationality);
 
+    /**
+     * Finds ebooks in the repository that match the provided ISBN, author, and title.
+     * If any of these parameters are null, it will ignore that parameter in the search.
+     *
+     * @param ISBN The ISBN of the ebooks to be retrieved.
+     * @param author The author of the ebooks to be retrieved.
+     * @param title The title of the ebooks to be retrieved.
+     * @return A list of ebooks that match the provided ISBN, author, and title.
+     */
+    @Query("SELECT b FROM Book b WHERE TYPE(b) = EBook AND (:ISBN IS NULL OR b.ISBN = :ISBN) AND (:author IS NULL OR b.author = :author) AND (:title IS NULL OR b.title = :title)")
+    List<Book> findEBookByAttributes(@Param("ISBN") Integer ISBN, @Param("author") String author, @Param("title") String title);
 }
 
 

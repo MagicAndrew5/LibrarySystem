@@ -13,7 +13,9 @@
             <div class="container">
                 <div class="main">
                     <h1>Home Page </h1>
-                    <p class="btn-primary">Welcome to your home page. Below, you can find all your borrowed books.</p>
+                    <p class="btn-primary">Welcome to your home page, <span th:text="${user.username}"></span>!!
+                        <br> Your library member ID is <span th:text="${libraryMember.id}"></span>.
+                        Below, you can find all your borrowed books.</br></p>
                 </div>
                 <div class="container-homePage">
                     <a class="btn-default" th:href="@{/searchBook}">Search for Books</a>
@@ -22,7 +24,6 @@
                 <div class="container-homePage2">
                     <a class="btn-default" th:href="@{/searchBookFull}">Search for advanced books</a>
                 </div>
-
             </div>
         </div>
 

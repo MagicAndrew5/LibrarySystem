@@ -36,11 +36,42 @@
                 <input class="cool-button" name="submit" th:type="submit" value="Search" />
             </div>
 
-        </form>
+
+        <div>
+            <form th:action="@{/searchBooks}" method="post" th:object="${books}" class="Form2">
+
+                <div class="Form3">
+                    <h1 class="centered-text">Search For A Book:</h1>
+
+                    <input type="text" th:field="*{ISBN}" placeholder="ISBN" id="ISBN" />
+                    <input type="text" th:field="*{author}" placeholder="Author" id="author" />
+                    <input type="text" th:field="*{title}" placeholder="Title" id="title" />
+
+                    <input type="checkbox" id="ebooksOnly" name="ebooksOnly" />
+                    <label class="btn-searchEbook" for="ebooksOnly">Search EBooks only</label>
+
+                    <input class="cool-button-searchbook" name="submit" th:type="submit" value="Search" />
+
+
+                    <div th:if="${message}" id="message-box" class="alert alert-danger">
+                        [[${message}]]
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
 
     </div>
 
-</div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                $(".alert").fadeOut('slow');
+            }, 3000);
+        });
+    </script>
 
 </body>
 </html>
