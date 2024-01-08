@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -61,27 +63,35 @@ public class LibraryController {
      */
     @GetMapping("/HomePage")
     public String showHomePage(Model model, HttpSession session) {
+
         // Get the user from the session
         User actualUser = (User) session.getAttribute("actualUser");
         System.out.println("User info: " + actualUser);
 
-        // Get the book from the session
-        Book actualBook = (Book) session.getAttribute("actualBook");
-        System.out.println("Book info: " + actualBook);
+        // Get the library member ID from the session
+        System.out.println("User Library Member ID info: " + actualUser.getLibraryMember().getId());
 
-        // Get the library member from the session
-        LibraryMember actualLibraryMember = (LibraryMember) session.getAttribute("actualLibraryMember");
-        System.out.println("LibraryMember info: " + actualLibraryMember);
+        // List book that the user has borrowed
+        List<Book> borrowedBooks = new ArrayList<>();
+        borrowedBooks = service.findBookByLibraryMember(actualUser.getLibraryMember());
+        System.out.println("Books borrowed info: " + borrowedBooks);
+
+        // List book that the user historical borrowed
+        List<Book> historianBooks = new ArrayList<>();
+        historianBooks = service.findHistoricalBookByLibraryMember(actualUser.getLibraryMember());
+        System.out.println("Historian Books info: " + historianBooks);
+
+        // List all books
+        List<Book> listAllBooks = service.findAllBooks();
+        System.out.println("All Books info: " + listAllBooks);
 
         model.addAttribute("user", actualUser);
-        model.addAttribute("libraryMember", actualLibraryMember);
-        model.addAttribute("books", actualBook);
+        model.addAttribute("libraryMember", actualUser.getLibraryMember());
 
-        List<Book> listBooks = service.findAllBooks();
-        model.addAttribute("listBooks", listBooks);
-        for (int i = 0; i < listBooks.size(); i++){
-            System.out.println(listBooks.get(i).toString());
-        }
+        // Model attributes for the books
+        model.addAttribute("borrowedBooks", borrowedBooks);
+        model.addAttribute("historianBook", historianBooks);
+        model.addAttribute("listAllBooks", listAllBooks);
 
         return "HomePage";
     }
@@ -95,6 +105,13 @@ public class LibraryController {
     public String showSearchBookPage(Model model) {
         model.addAttribute("books", new Book());
         return "SearchBook";
+    }
+
+    @GetMapping("/detailBooks/{isbn}")
+    public String detailBooks(Model model, @PathVariable("isbn") Integer isbn) {
+        Book bookRetrieve = service.findBookByISBN(isbn);
+        model.addAttribute("bookDetails", bookRetrieve);
+        return "prova";
     }
 
     // ------------------- POST METHODS -------------------
@@ -189,6 +206,30 @@ public class LibraryController {
 
         model.addAttribute("book", book);
         model.addAttribute("libraryMember", libraryMember);
+
+        return "redirect:/HomePage";
+    }
+
+
+    /**
+     * Handles the POST request for removing a book from a library member.
+     * @param isbn The ISBN of the book to remove.
+     * @param model The model to add attributes to.
+     * @param session The current HTTP session.
+     * @return The name of the redirect view.
+     */
+    @PostMapping("/removeBook/{isbn}")
+    public String removeBook(@PathVariable("isbn") Integer isbn, Model model, HttpSession session) {
+
+        // Retrieve the actual libraryMember and actual book from the database
+        LibraryMember libraryMember = (LibraryMember) session.getAttribute("actualLibraryMember");
+        Book actualBook = service.findBookByISBN(isbn);
+
+        // Remove the book from the library member
+        service.removeBookFromLibraryMember(actualBook, libraryMember.getId());
+
+        model.addAttribute("bookRemove", actualBook);
+        model.addAttribute("libraryMemberRemove", libraryMember);
 
         return "redirect:/HomePage";
     }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link type="text/css" rel="stylesheet" th:href="@{/basicStyle.css}"/>
+  <title>List Book Page</title>
+</head>
+<body>
+
+<div class="backgroundListBook">
+  <div class="Form-container">
+    <div class="FormListBook">
+      <form th:action="@{'/removeBook/' + ${bookDetails.ISBN}}" method="post" th:each="bookDetails : ${bookDetails}">
+        <table>
+          <tr>
+            <th class="text-ListPage">ISBN</th>
+            <th class="text-ListPage">Title</th>
+            <th class="text-ListPage">Author</th>
+            <th class="text-ListPage">Genre</th>
+            <th class="text-ListPage">Publisher</th>
+          </tr>
+          <tr>
+            <td th:text="${bookDetails.ISBN}">-</td>
+            <td th:text="${bookDetails.title}">-</td>
+            <td th:text="${bookDetails.author}">-</td>
+            <td th:text="${bookDetails.genre}">-</td>
+            <td th:text="${bookDetails.publisher}">-</td>
+            <td>
+              <input type="hidden" th:field="*{bookDetails.ISBN}"/>
+              <button type="submit">Invia</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>
