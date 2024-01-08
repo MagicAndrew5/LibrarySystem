@@ -152,6 +152,20 @@ html, body
     position: absolute;
     top: 30px; /* Distanza dal top */
     right: 50px; /* Distanza dal right */
+    padding: 5px;
+}
+
+.container-homePage2 {
+    position: absolute;
+    top: 80px; /* Distanza dal top */
+    right: 50px; /* Distanza dal right */
+
+
+}
+
+.container-homePage + .btn-default {
+    display: block;
+    margin-bottom: 10px; /* Aggiunge spazio tra i bottoni */
 }
 
 .col
@@ -195,7 +209,7 @@ html, body
     text-align: center;
     color: rgb(255, 255, 255);
     font-family: 'Raleway', sans-serif;
-    margin-left: 10px;
+    margin: 10px;
 }
 .text-ListPage2{
     text-align: center;
@@ -260,7 +274,9 @@ html, body
     border-color: black;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     max-width: 500px;
-    margin: 50px auto;
+    margin-left: 50px;
+    flex: 1;
+
 }
 .Form h1 {
     color: #ffffff; /* White text color */
@@ -316,7 +332,67 @@ form input[type="text"], form input[type="password"] {
     margin-right: 40px;
     color: white;
     font-family: 'Raleway', sans-serif;
-    background: url('images/BookImage.jpg') no-repeat center center;
-
+    background: url('images/BookImage.jpg') no-repeat center center fixed;
 
 }
+
+/* styles.css */
+
+.book-info {
+    height: 280px;
+    width: 250px;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.book-details {
+    margin-left: 20px;
+}
+
+img {
+    max-width: 100px;
+    height: auto;
+    border: 1px solid #ccc;
+}
+
+.text-ListPage {
+    display: block;
+    color: black;
+    margin-bottom: 5px; /* Adjust the margin between labels */
+}
+
+.table-container table td {
+    display: block;
+    margin-bottom: 5px; /* Adjust the margin between table items */
+}
+
+table {
+    border-collapse: collapse;
+    width: 70%;
+    border: 2px solid black;
+    margin: 20px;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.Form-container {
+    display: flex;
+    align-items: center;
+}
+
+.image-slot {
+
+    margin-right: 20px; /* Adjust as needed */
+    border-color: white;
+
+}
+

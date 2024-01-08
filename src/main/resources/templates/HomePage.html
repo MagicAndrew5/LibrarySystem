@@ -31,6 +31,15 @@
                     <a class="btn-default" th:href="@{/searchBook}">Search for Books</a>
                 </div>
 
+                <!-- TODO
+                fare pagina che mi permetta di aggiungere un nuovo libro alla bilbioteca.
+                Questo libro deve essere mostrato poi nel flickity dei borrows books
+                (andare a vedere la checkSaveAccount)-->
+
+                <div class="container-homePage2">
+                    <a class="btn-default" th:href="@{/registerNewBook}">Register new Book</a>
+                </div>
+
             </div>
         </div>
 
@@ -51,31 +60,20 @@
 
         </div>
 
-<!--
-    <h2 class="text-HomePage"> Books that you can borrow:</h2>
-    <div class="main-carousel" th:each="book : ${listBooks}" data-flickity='{ "cellAlign": "left", "contain": true }'>
-            <div class="text-ListPage" th:text="${book.ISBN}"> Book </div>
-    </div>
 
--->
-    <!-- Your previous HTML code -->
-
-    <h2 class="text-HomePage"> Books that you can borrow:</h2>
+    <h2 class="text-HomePage"> Your books: </h2>
     <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
-        <!-- Thymeleaf iteration to populate the carousel with listBooks -->
-        <div th:each="book : ${listBooks}" class="carousel-cell">
-            <!-- Ensure each book is properly displayed within a carousel-cell -->
-
-            <tr class="text-ListPage" th:text="${book.ISBN}">
-            </tr>
-            <tr class="text-ListPage" th:text="${book.title}">
-            </tr>
-            <tr class="text-ListPage" th:text="${book.author}">
-            </tr>
-        </div>
+        <a th:href="@{'/detailBooks/' + ${book.ISBN}}" th:each="book : ${listBooks}" class="carousel-cell">
+            <table>
+                <tr class="text-ListPage" th:text="${book.ISBN}">
+                </tr>
+                <tr class="text-ListPage" th:text="${book.title}">
+                </tr>
+                <tr class="text-ListPage" th:text="${book.author}">
+            </table>
+        </a>
     </div>
 
-    <!-- Rest of your HTML code -->
 
 
        <!--

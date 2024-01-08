@@ -1,6 +1,7 @@
 package com.unimib.lybrarysystem.controller;
 
 import com.unimib.lybrarysystem.model.Book;
+import com.unimib.lybrarysystem.model.Genre;
 import com.unimib.lybrarysystem.model.LibraryMember;
 import com.unimib.lybrarysystem.model.User;
 import com.unimib.lybrarysystem.service.LibraryService;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -41,6 +44,15 @@ public class LibraryController {
         model.addAttribute("user", new User());
         return "SignInPage";
     }
+
+    //TODO
+    @GetMapping("/detailBooks/{isbn}")
+    public String detailBooks(Model model, @PathVariable("isbn") Integer isbn) {
+        Book bookRetrieve = service.findBookByISBN(isbn);
+        model.addAttribute("bookDetails", bookRetrieve);
+        return "BookInformation";
+    }
+
 
     /**
      * Handles the GET request for the new user registration form.
@@ -95,6 +107,13 @@ public class LibraryController {
     public String showSearchBookPage(Model model) {
         model.addAttribute("books", new Book());
         return "SearchBook";
+    }
+
+    // Mapping to display the RegisterNewBook page
+    @GetMapping("/registerNewBook")
+    public String registerNewBookPage(Model model) {
+        model.addAttribute("book", new Book());
+        return "RegisterNewBookPage";
     }
 
     // ------------------- POST METHODS -------------------
@@ -192,4 +211,16 @@ public class LibraryController {
 
         return "redirect:/HomePage";
     }
+
+    // Mapping to handle the form submission for saving a new book
+    @PostMapping("/saveBook")
+    public String saveBook( Book book, Model model ) {
+
+        service.saveBook(book);
+        List<Book> allBooks = service.findAllBooks();
+
+        model.addAttribute("listBooks", allBooks);
+        return "redirect:/HomePage";
+    }
+
 }

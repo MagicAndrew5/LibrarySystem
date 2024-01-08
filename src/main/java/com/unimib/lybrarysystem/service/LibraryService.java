@@ -1,6 +1,7 @@
 package com.unimib.lybrarysystem.service;
 
 import com.unimib.lybrarysystem.model.Book;
+import com.unimib.lybrarysystem.model.Genre;
 import com.unimib.lybrarysystem.model.LibraryMember;
 import com.unimib.lybrarysystem.model.User;
 import com.unimib.lybrarysystem.repository.BookRepository;
@@ -70,6 +71,18 @@ public class LibraryService {
         }
     }
 
+    public boolean saveBook(Book book) {
+        // Logic to save the book to the repository
+        Book exsistingBook = bookRepo.findByISBN(book.getISBN());
+        if(exsistingBook != null){
+            return false;
+        } else {
+            bookRepo.save(book);
+            return true;
+        }
+    }
+
+
 
     /**
      * Checks if the provided user's credentials match any existing user in the system.
@@ -119,5 +132,9 @@ public class LibraryService {
 
     public List<Book> findAllBooks() {
         return bookRepo.findAllBooks();
+    }
+
+    public Book findBookByISBN(Integer isbn) {
+        return bookRepo.findByISBN(isbn);
     }
 }

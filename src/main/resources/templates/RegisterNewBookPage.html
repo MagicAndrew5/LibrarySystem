@@ -1,11 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <link type="text/css" rel="stylesheet" href="../static/index_style.css"/>
-    <title>Register New Book</title>
+    <!--Linking to CSS-->
+    <link type="text/css" rel="stylesheet" th:href="@{/basicStyle.css}"/>
+    <meta charset="utf-8">
+    <title>RegisterNewBook</title>
 </head>
-<body>
 
+<body>
+<div class="backgroundRegistration">
+
+    <div th:if="${message}" class="alert alert-danger">
+        [[${message}]]
+    </div>
+
+    <div class="container">
+        <div class="remain">
+            <h1>Register a new book</h1>
+            <p class="btn-primary">Register a new book to add to the library catalogue!</p>
+        </div>
+    </div>
+
+    <div class="Form">
+        <h1>Fill in the form below</h1>
+        <!-- TODO Modify the method saveAccount with the method saveBook -->
+        <form th:action="@{/saveBook}" method="post" th:object="${book}" style="max-width: 500px; margin: 0 auto;">
+            <input type="text" th:field="*{ISBN}" placeholder="ISBN" required minlength="2" maxlength="45"/>
+            <input type="text" th:field="*{author}" placeholder="Author" required minlength="2" maxlength="45" />
+            <input type="text" th:field="*{genre}" placeholder="Genre" required minlength="2" maxlength="45" />
+            <input type="text" th:field="*{publisher}" placeholder="Publisher" required minlength="2" maxlength="45" />
+            <input type="text" th:field="*{title}" placeholder="Title" required minlength="2" maxlength="45" />
+
+            <div class="text-center">
+                <button class="cool-button" type="submit" name="Submit">Register new book</button>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>
