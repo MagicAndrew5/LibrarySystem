@@ -60,6 +60,10 @@ public interface BookRepository extends CrudRepository<Book, Integer> {
     @Query("SELECT b FROM Book b WHERE :libraryMember MEMBER OF b.historianMembers")
     List<Book> findHistoricalBookByLibraryMember(LibraryMember libraryMember);
 
+
+    @Query("SELECT b FROM Book b JOIN b.authors a WHERE b.publisher = :publisher AND a.nationality = :nationality")
+    List<Book> findBooksByPublisherAndAuthorNationality(String publisher, String nationality);
+
 }
 
 

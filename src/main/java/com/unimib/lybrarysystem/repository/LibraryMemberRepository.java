@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 /**
  * The repository for the library member entity.
+ * This interface extends CrudRepository and provides methods to perform CRUD operations on the library member entity.
  */
 public interface LibraryMemberRepository extends CrudRepository<LibraryMember, Integer> {
 

@@ -33,8 +33,8 @@ public class Book {
     @ManyToMany
     @JoinTable(
             name = "author_book",
-            joinColumns = @JoinColumn(name = "author_id"),
-            inverseJoinColumns = @JoinColumn(name = "book_ISBN")
+            joinColumns = @JoinColumn(name = "book_ISBN"),
+            inverseJoinColumns = @JoinColumn(name = "author_id")
     )
     private Set<Author> authors = new HashSet<>();
 
@@ -267,7 +267,6 @@ public class Book {
                 ", author='" + author + '\'' +
                 ", genre='" + genre + '\'' +
                 ", publisher='" + publisher + '\'' +
-                ", genreList=" + genreList +
                 '}';
     }
     // understand why this is not working with authors and borrowingMembers

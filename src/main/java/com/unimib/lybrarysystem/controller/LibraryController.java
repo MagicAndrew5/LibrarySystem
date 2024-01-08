@@ -1,5 +1,6 @@
 package com.unimib.lybrarysystem.controller;
 
+import com.unimib.lybrarysystem.model.Author;
 import com.unimib.lybrarysystem.model.Book;
 import com.unimib.lybrarysystem.model.LibraryMember;
 import com.unimib.lybrarysystem.model.User;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
@@ -39,7 +41,7 @@ public class LibraryController {
      * @return The name of the sign in page view.
      */
     @GetMapping("/signIn")
-    public String showSignInPage(Model model) {
+    public String showSignIn(Model model) {
         model.addAttribute("user", new User());
         return "SignInPage";
     }
@@ -50,7 +52,7 @@ public class LibraryController {
      * @return The name of the new user registration form view.
      */
     @GetMapping("/registerNewUser")
-    public String showNewUserForm(Model model) {
+    public String showRegistrationUser(Model model) {
         model.addAttribute("user", new User());
         return "RegisterNewUser";
     }
@@ -102,9 +104,23 @@ public class LibraryController {
      * @return The name of the book search page view.
      */
     @GetMapping("/searchBook")
-    public String showSearchBookPage(Model model) {
+    public String showSearchBook(Model model) {
         model.addAttribute("books", new Book());
         return "SearchBook";
+    }
+
+    /**
+     * Handles the GET request for the full book search page.
+     * Adds a new Book and Author object to the model for the search form.
+     *
+     * @param model The model to add attributes to.
+     * @return The name of the full book search page view.
+     */
+    @GetMapping("/searchBookFull")
+    public String showAdvancedSearchBook(Model model) {
+        model.addAttribute("searchBookDetails", new Book());
+        model.addAttribute("author", new Author());
+        return "SearchBookFull";
     }
 
     /**
@@ -116,9 +132,10 @@ public class LibraryController {
      * @return The name of the book details page view.
      */
     @GetMapping("/detailBooks/{isbn}")
-    public String detailBooks(Model model, @PathVariable("isbn") Integer isbn) {
+    public String showDetailBooks(Model model, @PathVariable("isbn") Integer isbn) {
         Book bookRetrieve = service.findBookByISBN(isbn);
         model.addAttribute("bookDetails", bookRetrieve);
+        //Todo: cambiare il file HTML di destinazione
         return "prova";
     }
 
@@ -131,9 +148,33 @@ public class LibraryController {
      * @return The name of the book list page view.
      */
     @PostMapping("/searchBooks")
-    public String listBookPage(Book book, Model model) {
+    public String showListBook(Book book, Model model) {
         List<Book> foundBooks = service.findBookByAttributes(book);
+        //System.out.println("foundBooks Controller Info: " + foundBooks);
         model.addAttribute("foundBooks", foundBooks);
+        model.addAttribute("book", new Book());
+        return "listBookPage";
+    }
+
+    /**
+     * Handles the POST request for the advanced book search.
+     * Retrieves books from the repository that match the provided publisher and author nationality and adds them to the model.
+     *
+     * @param publisher The publisher of the books to be retrieved.
+     * @param nationality The nationality of the author of the books to be retrieved.
+     * @param model The model to add attributes to.
+     * @return The name of the book list page view.
+     */
+    @PostMapping("/searchAdvancedBooks")
+    public String showListAdvancedBook(@RequestParam String publisher, @RequestParam String nationality, Model model) {
+        //System.out.println("publisher Controller Info: " + publisher);
+        //System.out.println("nationality Controller Info: " + nationality);
+
+        // Search books with these parameters
+        List<Book> foundBooks = service.findBooksByPublisherAndAuthorNationality(publisher, nationality);
+        //System.out.println("foundBooks Controller Info: " + foundBooks);
+        model.addAttribute("foundBooks", foundBooks);
+        model.addAttribute("book", new Book());
         return "listBookPage";
     }
 
@@ -149,13 +190,17 @@ public class LibraryController {
     @PostMapping("/checkAccount")
     public String checkAccount(User user, LibraryMember libraryMember, Model model, HttpSession session, RedirectAttributes ra) {
         boolean validCheck = service.checkLoginAccount(user);
+
         model.addAttribute("user", user);
         model.addAttribute("libraryMember", libraryMember);
+
         if(validCheck) {
 
+            // Retrieve the actual user and actual library member from the database
             User actualUser = service.findUser(user);
             session.setAttribute("actualUser", actualUser);
 
+            // Retrieve the actual library member from the database
             LibraryMember actualLibraryMember = service.findLibraryMember(actualUser.getLibraryMember());
             session.setAttribute("actualLibraryMember", actualLibraryMember);
 
@@ -178,13 +223,17 @@ public class LibraryController {
     @PostMapping("/saveAccount")
     public String addNewAccount(User user, LibraryMember libraryMember, Model model, RedirectAttributes ra, HttpSession session) {
         boolean validAccount = service.checkSaveAccount(user, libraryMember);
+
         model.addAttribute("user", user);
         model.addAttribute("libraryMember", libraryMember);
+
         if(validAccount) {
 
+            // Retrieve the actual user and actual library member from the database
             User actualUser = service.findUser(user);
             session.setAttribute("actualUser", actualUser);
 
+            // Retrieve the actual library member from the database
             LibraryMember actualLibraryMember = service.findLibraryMember(libraryMember);
             session.setAttribute("actualLibraryMember", actualLibraryMember);
 
@@ -202,12 +251,12 @@ public class LibraryController {
      * @param session The current HTTP session.
      * @return The name of the redirect view.
      */
-    @PostMapping("/addBook")
-    public String addBook(Model model, HttpSession session, Book book) {
+    @PostMapping("/addBook/{isbn}")
+    public String addBook(Model model, @PathVariable("isbn") Integer isbn, HttpSession session, Book book) {
 
         LibraryMember libraryMember = (LibraryMember) session.getAttribute("actualLibraryMember");
 
-        Book actualBook = service.findBook(book);
+        Book actualBook = service.findBookByISBN(isbn);
 
         session.setAttribute("actualBook", actualBook);
         service.addLinkBookToLibraryMember(actualBook, libraryMember);
@@ -217,7 +266,6 @@ public class LibraryController {
 
         return "redirect:/HomePage";
     }
-
 
     /**
      * Handles the POST request for removing a book from a library member.

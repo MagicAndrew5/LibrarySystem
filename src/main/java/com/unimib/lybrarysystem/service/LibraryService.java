@@ -203,4 +203,15 @@ public class LibraryService {
     public Book findBookByISBN(Integer isbn) {
         return bookRepo.findByISBN(isbn);
     }
+
+    /**
+     * Finds books in the repository that match the provided publisher and author's nationality.
+     *
+     * @param publisher The publisher of the books to be retrieved.
+     * @param nationality The nationality of the author of the books to be retrieved.
+     * @return A list of books that match the provided publisher and author's nationality.
+     */
+    public List<Book> findBooksByPublisherAndAuthorNationality(String publisher, String nationality) {
+        return bookRepo.findBooksByPublisherAndAuthorNationality(publisher, nationality);
+    }
 }
