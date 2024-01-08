@@ -37,7 +37,7 @@
                 (andare a vedere la checkSaveAccount)-->
 
                 <div class="container-homePage2">
-                    <a class="btn-default" th:href="@{/registerNewBook}">Register new Book</a>
+                    <a class="btn-default" th:href="@{/searchBookFull}">Search for advanced books</a>
                 </div>
 
             </div>
@@ -45,48 +45,50 @@
 
         <h2 class="text-HomePage"> Your books: </h2>
         <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
-            <div class="carousel-cell"> Book </div>
-            <div class="carousel-cell"> Book  </div>
-            <div class="carousel-cell"> Book  </div>
-            <div class="carousel-cell"> Book  </div>
-            <div class="carousel-cell"> Book  </div>
-            <div class="carousel-cell"> Book  </div>
-            <div class="carousel-cell"> Book </div>
-            <div class="carousel-cell"> Book  </div>
-            <div class="carousel-cell"> Book  </div>
-            <div class="carousel-cell"> Book  </div>
-            <div class="carousel-cell"> Book  </div>
-            <div class="carousel-cell"> Book  </div>
-
+            <a th:href="@{'/detailBooks/' + ${book.ISBN}}" th:each="book : ${borrowedBooks}" class="carousel-cell">
+                <table>
+                    <tr class="text-ListPage" th:text="${book.ISBN}">
+                    </tr>
+                    <tr class="text-ListPage" th:text="${book.title}">
+                    </tr>
+                    <tr class="text-ListPage" th:text="${book.author}">
+                </table>
+            </a>
         </div>
 
+        <h2 class="text-HomePage"> Books that you can borrow:</h2>
+        <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
+            <!-- Thymeleaf iteration to populate the carousel with listBooks -->
+            <div th:each="book : ${listAllBooks}" class="carousel-cell">
+                <!-- Ensure each book is properly displayed within a carousel-cell -->
 
-    <h2 class="text-HomePage"> Your books: </h2>
-    <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
-        <a th:href="@{'/detailBooks/' + ${book.ISBN}}" th:each="book : ${listBooks}" class="carousel-cell">
-            <table>
                 <tr class="text-ListPage" th:text="${book.ISBN}">
                 </tr>
                 <tr class="text-ListPage" th:text="${book.title}">
                 </tr>
                 <tr class="text-ListPage" th:text="${book.author}">
-            </table>
-        </a>
-    </div>
-
-
-
-       <!--
-
-            <div class="main-carousel" th:each="book : ${listBooks}" data-flickity='{ "cellAlign": "left", "contain": true }'>
-            <div th:each="book : ${books}" class="carousel-cell">
-                <div class="carousel-cell" style="background-image: url(./static/images/BookImage.jpg)" th:text="${book.ISBN}"> Books  </div>
-                <div class="carousel-cell"> Book  </div>
-                <div class="carousel-cell"> Book  </div>
-                <div class="carousel-cell"> Book  </div>
-
+                </tr>
             </div>
-        -->
+        </div>
+
+        <h2 class="text-HomePage"> Historical books:</h2>
+        <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
+            <!-- Thymeleaf iteration to populate the carousel with listBooks -->
+            <div th:each="book : ${historianBook}" class="carousel-cell">
+                <!-- Ensure each book is properly displayed within a carousel-cell -->
+
+                <tr class="text-ListPage" th:text="${book.ISBN}">
+                </tr>
+                <tr class="text-ListPage" th:text="${book.title}">
+                </tr>
+                <tr class="text-ListPage" th:text="${book.author}">
+                </tr>
+            </div>
+        </div>
+
+
+
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/3.0.0/flickity.pkgd.min.js"></script>
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

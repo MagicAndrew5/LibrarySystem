@@ -9,7 +9,9 @@ import java.util.List;
 
 /**
  * The repository for the user entity.
+ * This interface extends CrudRepository and provides methods to perform CRUD operations on the user entity.
  */
+
 public interface UserRepository extends CrudRepository<User, Integer> {
 
         /**

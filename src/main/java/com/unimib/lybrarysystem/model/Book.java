@@ -33,8 +33,8 @@ public class Book {
     @ManyToMany
     @JoinTable(
             name = "author_book",
-            joinColumns = @JoinColumn(name = "author_id"),
-            inverseJoinColumns = @JoinColumn(name = "book_ISBN")
+            joinColumns = @JoinColumn(name = "book_ISBN"),
+            inverseJoinColumns = @JoinColumn(name = "author_id")
     )
     private Set<Author> authors = new HashSet<>();
 
@@ -43,20 +43,21 @@ public class Book {
     @JoinColumn(name = "genre_id", nullable = false)
     private Genre genreList;
 
-
-    /*
-    @ManyToOne
-    @JoinColumn(name="book_isbn", nullable = false)
-    private LibraryMember borrowingMembers;
-    */
-
     @ManyToMany
     @JoinTable(
             name = "library_member_book",
-            joinColumns = @JoinColumn(name = "book_isbn"),
+            joinColumns = @JoinColumn(name = "isbn"),
             inverseJoinColumns = @JoinColumn(name = "library_member_id")
     )
     private List<LibraryMember> borrowingMembers;
+
+    @ManyToMany
+    @JoinTable(
+            name = "library_member_book_historian",
+            joinColumns = @JoinColumn(name = "isbn"),
+            inverseJoinColumns = @JoinColumn(name = "library_member_id")
+    )
+    private List<LibraryMember> historianMembers;
 
     /**
      * Constructs a Book object with specified parameters.
@@ -69,8 +70,9 @@ public class Book {
      * @param authors           The set of authors who wrote the book.
      * @param genreList         The genre object associated with the book.
      * @param libraryMember     The library members who borrowed the book.
+     * @param historianMembers  The library members who historian borrowed the book.
      */
-    public Book(Integer ISBN, String title, String author, String genre, String publisher, Set<Author> authors, Genre genreList, List<LibraryMember> libraryMember) {
+    public Book(Integer ISBN, String title, String author, String genre, String publisher, Set<Author> authors, Genre genreList, List<LibraryMember> libraryMember, List<LibraryMember> historianMembers) {
         this.ISBN = ISBN;
         this.title = title;
         this.author = author;
@@ -79,6 +81,7 @@ public class Book {
         this.authors = authors;
         this.genreList = genreList;
         this.borrowingMembers = libraryMember;
+        this.historianMembers = historianMembers;
     }
 
     /**
@@ -233,6 +236,23 @@ public class Book {
         this.borrowingMembers = borrowingMembers;
     }
 
+    /**
+     * Retrieves the list of library members who have previously borrowed the book.
+     *
+     * @return A list of library members who have previously borrowed the book.
+     */
+    public List<LibraryMember> getHistorianMembers() {
+        return historianMembers;
+    }
+
+    /**
+     * Sets the list of library members who have previously borrowed the book.
+     *
+     * @param historianMembers The list of library members to set.
+     */
+    public void setHistorianMembers(List<LibraryMember> historianMembers) {
+        this.historianMembers = historianMembers;
+    }
 
     /**
      * Returns a string representation of the Book object.
@@ -247,7 +267,6 @@ public class Book {
                 ", author='" + author + '\'' +
                 ", genre='" + genre + '\'' +
                 ", publisher='" + publisher + '\'' +
-                ", genreList=" + genreList +
                 '}';
     }
     // understand why this is not working with authors and borrowingMembers
@@ -265,7 +284,7 @@ public class Book {
         return Objects.equals(ISBN, book.ISBN) && Objects.equals(title, book.title) && Objects.equals(author, book.author) &&
                 Objects.equals(genre, book.genre) && Objects.equals(publisher, book.publisher) &&
                 Objects.equals(authors, book.authors) && Objects.equals(genreList, book.genreList) &&
-                Objects.equals(borrowingMembers, book.borrowingMembers);
+                Objects.equals(borrowingMembers, book.borrowingMembers) && Objects.equals(historianMembers, book.historianMembers);
     }
 
     /**
@@ -275,6 +294,6 @@ public class Book {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(ISBN, title, author, genre, publisher, authors, genreList, borrowingMembers);
+        return Objects.hash(ISBN, title, author, genre, publisher, authors, genreList, borrowingMembers, historianMembers);
     }
 }
