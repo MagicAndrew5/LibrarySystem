@@ -11,6 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -212,4 +215,25 @@ public class LibrarySystemTest {
         authorRepo.save(author);
         bookRepo.save(book);
     }
+
+    @Test
+    public void testSelfLoop() {
+
+        // Create a new author
+        Author author = new Author();
+        author.setName("Davide");
+        author.setSurname("Rosa");
+        author.setBirthDate("23/03/2010");
+        author.setNationality("American");
+
+        // Aggiungi l'autore come suo collaboratore (self-loop)
+        Set<Author> collaborators = new HashSet<>();
+        collaborators.add(author);
+        author.setCollaborators(collaborators);
+
+        // Salva l'autore nel database
+        authorRepo.save(author);
+    }
+
+
 }
