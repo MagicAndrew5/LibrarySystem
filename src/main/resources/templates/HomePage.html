@@ -30,11 +30,9 @@
         <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
             <a th:href="@{'/detailBooks/' + ${book.ISBN}}" th:each="book : ${borrowedBooks}" class="carousel-cell">
                 <table>
-                    <tr class="text-ListPage" th:text="${book.ISBN}">
-                    </tr>
                     <tr class="text-ListPage" th:text="${book.title}">
                     </tr>
-                    <tr class="text-ListPage" th:text="${book.author}">
+
                 </table>
             </a>
         </div>
@@ -43,11 +41,8 @@
         <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
             <a th:href="@{'/detailBooks/' + ${book.ISBN}}" th:each="book : ${listAllBooks}" class="carousel-cell">
                 <table>
-                    <tr class="text-ListPage" th:text="${book.ISBN}">
-                    </tr>
                     <tr class="text-ListPage" th:text="${book.title}">
                     </tr>
-                    <tr class="text-ListPage" th:text="${book.author}">
                 </table>
             </a>
         </div>
@@ -57,11 +52,8 @@
             <!-- Thymeleaf iteration to populate the carousel with listBooks -->
             <a th:href="@{'/detailBooks/' + ${book.ISBN}}" th:each="book : ${historianBook}" class="carousel-cell">
                 <table>
-                    <tr class="text-ListPage" th:text="${book.ISBN}">
-                    </tr>
                     <tr class="text-ListPage" th:text="${book.title}">
                     </tr>
-                    <tr class="text-ListPage" th:text="${book.author}">
                 </table>
             </a>
         </div>

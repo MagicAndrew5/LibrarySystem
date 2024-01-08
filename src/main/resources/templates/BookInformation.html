@@ -23,28 +23,28 @@
         <img src="/images/BookCover.jpeg" alt="Book Cover" />
     </div>
 
-    <div class="FormListBook">
+    <div class="FormListBook4">
         <form th:action="@{/removeBook}" method="post" th:each="bookDetails : ${bookDetails}">
             <table>
                 <tr>
-                    <th class="text-ListPage">ISBN</th>
-                    <td th:text="${bookDetails.ISBN}">-</td>
+                    <th class="th-bookInformation">ISBN</th>
+                    <td class="td-bookInformation" th:text="${bookDetails.ISBN}">-</td>
                 </tr>
                 <tr>
-                    <th class="text-ListPage">Title</th>
-                    <td th:text="${bookDetails.title}">-</td>
+                    <th class="th-bookInformation">Title</th>
+                    <td class="td-bookInformation" th:text="${bookDetails.title}">-</td>
                 </tr>
                 <tr>
-                    <th class="text-ListPage">Author</th>
-                    <td th:text="${bookDetails.author}">-</td>
+                    <th class="th-bookInformation">Author</th>
+                    <td class="td-bookInformation" th:text="${bookDetails.author}">-</td>
                 </tr>
                 <tr>
-                    <th class="text-ListPage">Genre</th>
-                    <td th:text="${bookDetails.genre}">-</td>
+                    <th class="th-bookInformation">Genre</th>
+                    <td class="td-bookInformation" th:text="${bookDetails.genre}">-</td>
                 </tr>
                 <tr>
-                    <th class="text-ListPage">Publisher</th>
-                    <td th:text="${bookDetails.publisher}">-</td>
+                    <th class="th-bookInformation">Publisher</th>
+                    <td class="td-bookInformation" th:text="${bookDetails.publisher}">-</td>
                 </tr>
             </table>
         </form>
@@ -52,6 +52,3 @@
 </div>
 </body>
 </html>
-
-
-

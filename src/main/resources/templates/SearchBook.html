@@ -10,37 +10,37 @@
 <body>
 
 
-    <div class="backgroundSearchBook">
-        <div class="container">
-            <div class="main">
-                <h1>Search</h1>
-                <p class="btn-primary">Search for a book in the library, you may wish to reserve it if available!</p>
+<div class="backgroundSearchBook">
+    <div class="container">
+        <div class="main">
+            <h1>Search</h1>
+            <p class="btn-primary">Search for a book in the library, you may wish to reserve it if available!</p>
+        </div>
+    </div>
+
+
+    <div>
+        <form th:action="@{/searchBooks}" method="post" th:object="${books}" class="Form2">
+
+            <div class="Form3">
+                <h1 class="centered-text">Search For A Book:</h1>
+
+                <input type="text" th:field="*{ISBN}" placeholder="ISBN" id="ISBN" />
+
+
+                <input type="text" th:field="*{author}" placeholder="Author" id="author" />
+
+
+                <input type="text" th:field="*{title}" placeholder="Title" id="title" />
+
+                <input class="cool-button" name="submit" th:type="submit" value="Search" />
             </div>
-        </div>
 
-
-        <div>
-            <form th:action="@{/searchBooks}" method="post" th:object="${books}" class="Form2">
-
-                <div class="Form3">
-                    <h1 class="centered-text">Search For A Book:</h1>
-
-                    <input type="text" th:field="*{ISBN}" placeholder="ISBN" id="ISBN" />
-
-
-                    <input type="text" th:field="*{author}" placeholder="Author" id="author" />
-
-
-                    <input type="text" th:field="*{title}" placeholder="Title" id="title" />
-
-                    <input class="cool-button" name="submit" th:type="submit" value="Search" />
-                </div>
-
-            </form>
-
-        </div>
+        </form>
 
     </div>
+
+</div>
 
 </body>
 </html>
