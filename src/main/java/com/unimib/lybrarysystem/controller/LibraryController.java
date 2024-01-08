@@ -136,7 +136,16 @@ public class LibraryController {
     public String showDetailBooks(Model model, @PathVariable("isbn") Integer isbn) {
         Book bookRetrieve = service.findBookByISBN(isbn);
         model.addAttribute("bookDetails", bookRetrieve);
+        System.out.println("Book info: " + bookRetrieve);
         return "BookInformation";
+    }
+
+    @GetMapping("/detailBooksBorrowed/{isbn}")
+    public String showDetailBooksBorrowed(Model model, @PathVariable("isbn") Integer isbn) {
+        Book bookRetrieve = service.findBookByISBN(isbn);
+        model.addAttribute("bookDetails", bookRetrieve);
+        System.out.println("Book info: " + bookRetrieve);
+        return "BookInformationBorrowed";
     }
 
     // ------------------- POST METHODS -------------------

@@ -15,7 +15,38 @@
         </div>
 
         <div class="Form-container">
-            <div class="FormListBook">
+            <div class="FormListBook3">
+                <table class="tableListBook">
+                    <tr>
+                        <th class="text-ListPage">ISBN</th>
+                        <th class="text-ListPage">Title</th>
+                        <th class="text-ListPage">Author</th>
+                        <th class="text-ListPage">Genre</th>
+                        <th class="text-ListPage">Publisher</th>
+                    </tr>
+
+                    <form th:action="@{'/addBook/' + ${book.ISBN}}" method="post" th:each="book : ${foundBooks}">
+                        <tr>
+                            <td th:text="${book.ISBN}">-</td>
+                            <td th:text="${book.title}">-</td>
+                            <td th:text="${book.author}">-</td>
+                            <td th:text="${book.genre}">-</td>
+                            <td th:text="${book.publisher}">-</td>
+                            <td>
+                                <input type="hidden" th:field="*{book.ISBN}"/>
+                                <button class="cool-button" type="submit">Add Book</button>
+                            </td>
+                        </tr>
+                    </form>
+                </table>
+            </div>
+        </div>
+
+
+
+        <!--
+        <div class="Form-container">
+            <div class="FormListBook3">
                 <form th:action="@{'/addBook/' + ${book.ISBN}}" method="post" th:each="book : ${foundBooks}">
                     <table>
                         <tr>
@@ -40,6 +71,7 @@
                 </form>
             </div>
         </div>
+        -->
     </div>
 </body>
 </html>

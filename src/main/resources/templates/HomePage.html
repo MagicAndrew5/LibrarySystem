@@ -29,7 +29,7 @@
 
         <h2 class="text-HomePage"> Your books: </h2>
         <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
-            <a th:href="@{'/detailBooks/' + ${book.ISBN}}" th:each="book : ${borrowedBooks}" class="carousel-cell">
+            <a th:href="@{'/detailBooksBorrowed/' + ${book.ISBN}}" th:each="book : ${borrowedBooks}" class="carousel-cell">
                 <table>
                     <tr class="text-ListPage" th:text="${book.title}">
                     </tr>

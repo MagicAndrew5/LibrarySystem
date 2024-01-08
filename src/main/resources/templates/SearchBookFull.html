@@ -26,6 +26,7 @@
                 <h1 class="centered-text">Search For A Book:</h1>
                 <input type="text" th:field="*{publisher}" placeholder="Publisher" id="publisher" />
                 <input type="text" th:field="${author.nationality}" placeholder="Nationality of author" id="nationality" />
+
                 <input class="cool-button" name="submit" th:type="submit" value="Search" />
 
                 <div th:if="${message}" id="message-box" class="alert alert-danger">
