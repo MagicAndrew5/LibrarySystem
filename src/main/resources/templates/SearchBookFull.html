@@ -27,11 +27,25 @@
                 <input type="text" th:field="*{publisher}" placeholder="Publisher" id="publisher" />
                 <input type="text" th:field="${author.nationality}" placeholder="Nationality of author" id="nationality" />
                 <input class="cool-button" name="submit" th:type="submit" value="Search" />
+
+                <div th:if="${message}" id="message-box" class="alert alert-danger">
+                    [[${message}]]
+                </div>
+
             </div>
         </form>
     </div>
 
 </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function() {
+        setTimeout(function() {
+            $(".alert").fadeOut('slow');
+        }, 3000);
+    });
+</script>
 
 </body>
 </html>

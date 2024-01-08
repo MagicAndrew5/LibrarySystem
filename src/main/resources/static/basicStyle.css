@@ -393,6 +393,29 @@ th {
 
     margin-right: 20px; /* Adjust as needed */
     border-color: white;
-
 }
+
+/* Box del messaggio */
+.message-box {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+/* Stile del messaggio per errore */
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 18px;
+}
+
+
 
