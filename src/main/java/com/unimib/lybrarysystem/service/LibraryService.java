@@ -7,8 +7,10 @@ import com.unimib.lybrarysystem.repository.BookRepository;
 import com.unimib.lybrarysystem.repository.LibraryMemberRepository;
 import com.unimib.lybrarysystem.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -37,6 +39,7 @@ public class LibraryService {
 
 
     // ------------------- METHODS -------------------
+
     /**
      * Checks if the user is already registered in the system.
      *
@@ -70,7 +73,6 @@ public class LibraryService {
         }
     }
 
-
     /**
      * Checks if the provided user's credentials match any existing user in the system.
      *
@@ -87,37 +89,129 @@ public class LibraryService {
     }
 
     /**
-     * Finds books in the repository that match the provided attributes.
+     * Adds a link between a book and a library member in the system.
+     * This represents the action of a library member borrowing a book.
      *
-     * @param book The book object containing the ISBN, author, and title to be matched.
-     * @return A list of books that match the provided attributes.
+     * @param book The book to be borrowed.
+     * @param libraryMember The library member who is borrowing the book.
      */
-    public List<Book> findByAttributes(Book book) {
-        return bookRepo.findByAttributes(book.getISBN(), book.getAuthor(), book.getTitle());
-    }
-
     public void addLinkBookToLibraryMember(Book book, LibraryMember libraryMember) {
         // Relationship between book and library member
         book.getBorrowingMembers().add(libraryMember);
+        book.getHistorianMembers().add(libraryMember);
         bookRepo.save(book);
     }
 
+    /**
+     * Removes a book from a library member's borrowed books list.
+     * This operation is performed within a transaction to ensure consistency.
+     *
+     * @param actualBook The book to be removed.
+     * @param libraryMemberId The ID of the library member from whom the book is to be removed.
+     */
+    @Transactional
+    public void removeBookFromLibraryMember(Book actualBook, Integer libraryMemberId) {
+
+        // Retrieve the actual library member from the database
+        LibraryMember libraryMember = libraryMemberRepo.findLibraryMemberWithBorrowedBooksById(libraryMemberId);
+
+        // Now you can safely remove the book from the borrowedBooks collection
+        libraryMember.removeBorrowedBook(actualBook);
+
+        // Save the changes
+        libraryMemberRepo.save(libraryMember);
+    }
+
+    /**
+     * Finds a user in the repository that matches the provided user's username and password.
+     *
+     * @param user The user object containing the username and password to be matched.
+     * @return The user that matches the provided username and password.
+     */
     public User findUser(User user) {
         // Retrieve the actual user from the database
         return userRepo.findByUsernamePassword(user.getUsername(), user.getPassword());
     }
 
+    /**
+     * Finds a library member in the repository that matches the provided library member's ID.
+     *
+     * @param libraryMember The library member object containing the ID to be matched.
+     * @return The library member that matches the provided ID.
+     */
     public LibraryMember findLibraryMember(LibraryMember libraryMember) {
-        // Retrieve the actual librarymember from the database
+        // Retrieve the actual library member from the database
         return libraryMemberRepo.findLibraryMemberById(libraryMember.getId());
     }
 
+    /**
+     * Finds a book in the repository that matches the provided book's ISBN.
+     *
+     * @param book The book object containing the ISBN to be matched.
+     * @return The book that matches the provided ISBN.
+     */
     public Book findBook(Book book) {
         // Retrieve the actual book from the database
         return bookRepo.findByISBN(book.getISBN());
     }
 
+    /**
+     * Finds all books in the repository.
+     *
+     * @return A list of all books in the repository.
+     */
     public List<Book> findAllBooks() {
         return bookRepo.findAllBooks();
+    }
+
+    /**
+     * Finds books in the repository that match the provided attributes.
+     *
+     * @param book The book object containing the ISBN, author, and title to be matched.
+     * @return A list of books that match the provided attributes.
+     */
+    public List<Book> findBookByAttributes(Book book) {
+        return bookRepo.findBookByAttributes(book.getISBN(), book.getAuthor(), book.getTitle());
+    }
+
+    /**
+     * Finds books in the repository that are currently borrowed by the provided library member.
+     *
+     * @param libraryMember The library member whose borrowed books are to be found.
+     * @return A list of books that are currently borrowed by the provided library member.
+     */
+    public List<Book> findBookByLibraryMember(LibraryMember libraryMember) {
+        return bookRepo.findBookByLibraryMember(libraryMember);
+    }
+
+    /**
+     * Finds books in the repository that were previously borrowed by the provided library member.
+     *
+     * @param libraryMember The library member whose historical borrowed books are to be found.
+     * @return A list of books that were previously borrowed by the provided library member.
+     */
+    public List<Book> findHistoricalBookByLibraryMember(LibraryMember libraryMember) {
+        return bookRepo.findHistoricalBookByLibraryMember(libraryMember);
+    }
+
+    /**
+     * Finds a book in the repository that matches the provided ISBN.
+     *
+     * @param isbn The ISBN of the book to be found.
+     * @return The book that matches the provided ISBN.
+     */
+    public Book findBookByISBN(Integer isbn) {
+        return bookRepo.findByISBN(isbn);
+    }
+
+    /**
+     * Finds books in the repository that match the provided publisher and author's nationality.
+     *
+     * @param publisher The publisher of the books to be retrieved.
+     * @param nationality The nationality of the author of the books to be retrieved.
+     * @return A list of books that match the provided publisher and author's nationality.
+     */
+    public List<Book> findBooksByPublisherAndAuthorNationality(String publisher, String nationality) {
+        return bookRepo.findBooksByPublisherAndAuthorNationality(publisher, nationality);
     }
 }
