@@ -2,7 +2,6 @@ package com.unimib.lybrarysystem.controller;
 
 import com.unimib.lybrarysystem.model.Author;
 import com.unimib.lybrarysystem.model.Book;
-import com.unimib.lybrarysystem.model.Genre;
 import com.unimib.lybrarysystem.model.LibraryMember;
 import com.unimib.lybrarysystem.model.User;
 import com.unimib.lybrarysystem.service.LibraryService;
@@ -107,6 +106,7 @@ public class LibraryController {
     @GetMapping("/searchBook")
     public String showSearchBook(Model model) {
         model.addAttribute("books", new Book());
+        model.addAttribute("author", new Author());
         return "SearchBook";
     }
 
@@ -148,12 +148,34 @@ public class LibraryController {
      * @return The name of the book list page view.
      */
     @PostMapping("/searchBooks")
-    public String showListBook(Book book, Model model) {
-        List<Book> foundBooks = service.findBookByAttributes(book);
-        //System.out.println("foundBooks Controller Info: " + foundBooks);
-        model.addAttribute("foundBooks", foundBooks);
-        model.addAttribute("book", new Book());
-        return "listBookPage";
+    public String showListBook(@RequestParam(required = false) boolean ebooksOnly, Book book, Model model, RedirectAttributes ra) {
+
+        if(ebooksOnly) {
+            List<Book> foundBooks = service.findEBookByAttributes(book);
+            model.addAttribute("foundBooks", foundBooks);
+            model.addAttribute("books", new Book());
+
+            if(foundBooks.isEmpty()) {
+                ra.addFlashAttribute("message", "Your search result generated no matches, please try again");
+                return "redirect:/searchBook";
+            }
+            else {
+                return "listBookPage";
+            }
+        }
+        else {
+            List<Book> foundBooks = service.findBookByAttributes(book);
+            model.addAttribute("foundBooks", foundBooks);
+            model.addAttribute("books", new Book());
+
+            if(foundBooks.isEmpty()) {
+                ra.addFlashAttribute("message", "Your search result generated no matches, please try again");
+                return "redirect:/searchBook";
+            }
+            else {
+                return "listBookPage";
+            }
+        }
     }
 
     /**
@@ -166,7 +188,8 @@ public class LibraryController {
      * @return The name of the book list page view.
      */
     @PostMapping("/searchAdvancedBooks")
-    public String showListAdvancedBook(@RequestParam String publisher, @RequestParam String nationality, Model model) {
+    public String showListAdvancedBook(@RequestParam String publisher, @RequestParam String nationality, Model model, RedirectAttributes ra) {
+
         //System.out.println("publisher Controller Info: " + publisher);
         //System.out.println("nationality Controller Info: " + nationality);
 
@@ -175,7 +198,14 @@ public class LibraryController {
         //System.out.println("foundBooks Controller Info: " + foundBooks);
         model.addAttribute("foundBooks", foundBooks);
         model.addAttribute("book", new Book());
-        return "listBookPage";
+
+        if(foundBooks.isEmpty()) {
+            ra.addFlashAttribute("message", "Your search result generated no matches, please try again");
+            return "redirect:/searchBookFull";
+        }
+        else {
+            return "listBookPage";
+        }
     }
 
     /**

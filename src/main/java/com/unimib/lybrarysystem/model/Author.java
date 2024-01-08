@@ -234,8 +234,10 @@ public class Author {
      *
      * @return A hash code value for this object.
      */
+    /*
     @Override
     public int hashCode() {
         return Objects.hash(id, name, surname, birthDate, nationality, books, collaborators);
     }
+    */
 }
