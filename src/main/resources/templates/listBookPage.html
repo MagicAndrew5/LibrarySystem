@@ -31,7 +31,7 @@
                             <td th:text="${book.ISBN}">-</td>
                             <td th:text="${book.title}">-</td>
                             <td th:text="${book.author}">-</td>
-                            <td th:text="${book.genre}">-</td>
+                            <td th:each="genre : ${genres}" th:text="${genre.name}">-</td>
                             <td th:text="${book.publisher}">-</td>
                             <td>
                                 <input type="hidden" th:field="*{book.ISBN}"/>

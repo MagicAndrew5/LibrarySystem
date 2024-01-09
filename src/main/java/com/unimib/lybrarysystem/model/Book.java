@@ -27,9 +27,6 @@ public class Book {
     private String author;
 
     @Column(nullable = false, length = 45)
-    private String genre;
-
-    @Column(nullable = false, length = 45)
     private String publisher;
 
     @ManyToMany
@@ -67,18 +64,16 @@ public class Book {
      * @param ISBN              The unique identifier for the book.
      * @param title             The title of the book.
      * @param author            The author of the book.
-     * @param genre             The genre of the book.
      * @param publisher         The publisher of the book.
      * @param authors           The set of authors who wrote the book.
      * @param genreList         The genre object associated with the book.
      * @param libraryMember     The library members who borrowed the book.
      * @param historianMembers  The library members who historian borrowed the book.
      */
-    public Book(Integer ISBN, String title, String author, String genre, String publisher, Set<Author> authors, Genre genreList, List<LibraryMember> libraryMember, List<LibraryMember> historianMembers) {
+    public Book(Integer ISBN, String title, String author, String publisher, Set<Author> authors, Genre genreList, List<LibraryMember> libraryMember, List<LibraryMember> historianMembers) {
         this.ISBN = ISBN;
         this.title = title;
         this.author = author;
-        this.genre = genre;
         this.publisher = publisher;
         this.authors = authors;
         this.genreList = genreList;
@@ -145,24 +140,6 @@ public class Book {
      */
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    /**
-     * Retrieves the genre of the book.
-     *
-     * @return The genre of the book.
-     */
-    public String getGenre() {
-        return genre;
-    }
-
-    /**
-     * Sets the genre for the book.
-     *
-     * @param genre The genre to set for the book.
-     */
-    public void setGenre(String genre) {
-        this.genre = genre;
     }
 
     /**
@@ -267,7 +244,6 @@ public class Book {
                 "ISBN=" + ISBN +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
-                ", genre='" + genre + '\'' +
                 ", publisher='" + publisher + '\'' +
                 '}';
     }
@@ -284,9 +260,9 @@ public class Book {
         if (this == o) return true;
         if (!(o instanceof Book book)) return false;
         return Objects.equals(ISBN, book.ISBN) && Objects.equals(title, book.title) && Objects.equals(author, book.author) &&
-                Objects.equals(genre, book.genre) && Objects.equals(publisher, book.publisher) &&
-                Objects.equals(authors, book.authors) && Objects.equals(genreList, book.genreList) &&
-                Objects.equals(borrowingMembers, book.borrowingMembers) && Objects.equals(historianMembers, book.historianMembers);
+                Objects.equals(publisher, book.publisher) && Objects.equals(authors, book.authors) &&
+                Objects.equals(genreList, book.genreList) && Objects.equals(borrowingMembers, book.borrowingMembers) &&
+                Objects.equals(historianMembers, book.historianMembers);
     }
 
     /**
@@ -296,6 +272,6 @@ public class Book {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(ISBN, title, author, genre, publisher, authors, genreList, borrowingMembers, historianMembers);
+        return Objects.hash(ISBN, title, author, publisher, authors, genreList, borrowingMembers, historianMembers);
     }
 }

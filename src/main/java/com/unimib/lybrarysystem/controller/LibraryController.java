@@ -1,9 +1,6 @@
 package com.unimib.lybrarysystem.controller;
 
-import com.unimib.lybrarysystem.model.Author;
-import com.unimib.lybrarysystem.model.Book;
-import com.unimib.lybrarysystem.model.LibraryMember;
-import com.unimib.lybrarysystem.model.User;
+import com.unimib.lybrarysystem.model.*;
 import com.unimib.lybrarysystem.service.LibraryService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,7 +132,9 @@ public class LibraryController {
     @GetMapping("/detailBooks/{isbn}")
     public String showDetailBooks(Model model, @PathVariable("isbn") Integer isbn) {
         Book bookRetrieve = service.findBookByISBN(isbn);
+        Genre genreRetrieve = bookRetrieve.getGenreList();
         model.addAttribute("bookDetails", bookRetrieve);
+        model.addAttribute("genre", genreRetrieve);
         System.out.println("Book info: " + bookRetrieve);
         return "BookInformation";
     }
@@ -143,7 +142,9 @@ public class LibraryController {
     @GetMapping("/detailBooksBorrowed/{isbn}")
     public String showDetailBooksBorrowed(Model model, @PathVariable("isbn") Integer isbn) {
         Book bookRetrieve = service.findBookByISBN(isbn);
+        Genre genreRetrieve = bookRetrieve.getGenreList();
         model.addAttribute("bookDetails", bookRetrieve);
+        model.addAttribute("genre", genreRetrieve);
         System.out.println("Book info: " + bookRetrieve);
         return "BookInformationBorrowed";
     }
@@ -159,10 +160,19 @@ public class LibraryController {
     @PostMapping("/searchBooks")
     public String showListBook(@RequestParam(required = false) boolean ebooksOnly, Book book, Model model, RedirectAttributes ra) {
 
+        List<Genre> foundGenre = new ArrayList<>();
+
         if(ebooksOnly) {
             List<Book> foundBooks = service.findEBookByAttributes(book);
+            System.out.println(foundBooks);
+
+            for(int i = 0; i < foundBooks.size(); i++) {
+                Genre genre = foundBooks.get(i).getGenreList();
+                model.addAttribute("genres", genre);
+            }
+
             model.addAttribute("foundBooks", foundBooks);
-            model.addAttribute("books", new Book());
+            //model.addAttribute("books", new Book());
 
             if(foundBooks.isEmpty()) {
                 ra.addFlashAttribute("message", "Your search result generated no matches, please try again");
@@ -174,6 +184,13 @@ public class LibraryController {
         }
         else {
             List<Book> foundBooks = service.findBookByAttributes(book);
+
+
+            for(int i = 0; i < foundBooks.size(); i++) {
+                Genre genre = foundBooks.get(i).getGenreList();
+                model.addAttribute("genres", genre);
+            }
+
             model.addAttribute("foundBooks", foundBooks);
             model.addAttribute("books", new Book());
 
@@ -198,13 +215,18 @@ public class LibraryController {
      */
     @PostMapping("/searchAdvancedBooks")
     public String showListAdvancedBook(@RequestParam String publisher, @RequestParam String nationality, Model model, RedirectAttributes ra) {
-
-        //System.out.println("publisher Controller Info: " + publisher);
-        //System.out.println("nationality Controller Info: " + nationality);
-
         // Search books with these parameters
         List<Book> foundBooks = service.findBooksByPublisherAndAuthorNationality(publisher, nationality);
-        //System.out.println("foundBooks Controller Info: " + foundBooks);
+        System.out.println("foundBooks Controller Info: " + foundBooks);
+        List<Genre> foundGenre = new ArrayList<>();
+
+        for(int i = 0; i < foundBooks.size(); i++) {
+            Genre genre = foundBooks.get(i).getGenreList();
+            foundGenre.add(genre);
+            model.addAttribute("genres", genre);
+        }
+
+        //model.addAttribute("genres", foundGenre);
         model.addAttribute("foundBooks", foundBooks);
         model.addAttribute("book", new Book());
 

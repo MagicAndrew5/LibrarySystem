@@ -21,7 +21,6 @@ public class EBook extends Book {
      * @param ISBN              The unique identifier for the book.
      * @param title             The title of the book.
      * @param author            The author of the book.
-     * @param genre             The genre of the book.
      * @param publisher         The publisher of the book.
      * @param authors           The set of authors who wrote the book.
      * @param genreList         The genre object associated with the book.
@@ -30,12 +29,12 @@ public class EBook extends Book {
      * @param format            The format of the ebook (e.g., PDF, EPUB).
      * @param fileSizeMB        The file size of the ebook in megabytes.
      */
-    public EBook(Integer ISBN, String title, String author, String genre, String publisher,
+    public EBook(Integer ISBN, String title, String author, String publisher,
                  Set<Author> authors, Genre genreList, List<LibraryMember> libraryMember,
                  List<LibraryMember> historianMembers, String format, int fileSizeMB) {
 
         // Call the constructor of the superclass (Book)
-        super(ISBN, title, author, genre, publisher, authors, genreList, libraryMember, historianMembers);
+        super(ISBN, title, author, publisher, authors, genreList, libraryMember, historianMembers);
 
         // Initialize attributes specific to EBook
         this.format = format;

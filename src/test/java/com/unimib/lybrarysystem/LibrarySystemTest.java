@@ -49,7 +49,6 @@ public class LibrarySystemTest {
         book.setTitle("Harry Potter");
         book.setAuthor("J.K.Rowling");
         book.setPublisher("Feltrinelli");
-        book.setGenre("Fantasy");
         book.setGenreList(genre);
 
         // Save the book
@@ -151,25 +150,25 @@ public class LibrarySystemTest {
     public void testAddAuthorBookRelatioship() {
 
         Genre genre = new Genre();
-        genre.setName("Horror");
-        genre.setId(2);
+
+        genre.setName("Commedy");
+        //genre.setId(1);
 
         genreRepo.save(genre);
 
         Author author = new Author();
 
-        author.setName("Alberto");
-        author.setSurname("Blu");
-        author.setNationality("Italian");
-        author.setBirthDate("23/11/1999");
+        author.setName("Simone");
+        author.setSurname("Nero");
+        author.setNationality("German");
+        author.setBirthDate("05/12/1968");
 
         Book book = new Book();
 
         book.setISBN(123456789);
-        book.setAuthor("Alberto Blu");
-        book.setPublisher("Mondadori");
-        book.setTitle("Il libro degli incubi");
-        book.setGenre("Fantasy");
+        book.setAuthor("Simone Nero");
+        book.setPublisher("Hoepli");
+        book.setTitle("Risata");
         book.setGenreList(genre);
 
         book.getAuthors().add(author);
@@ -187,24 +186,23 @@ public class LibrarySystemTest {
 
         Genre genre = new Genre();
         genre.setName("Giallo");
-        genre.setId(3);
+        //genre.setId(3);
 
         genreRepo.save(genre);
 
         Author author = new Author();
 
-        author.setName("Andrea");
-        author.setSurname("Verde");
+        author.setName("Luca");
+        author.setSurname("Rosso");
         author.setNationality("Spanish");
-        author.setBirthDate("05/11/2000");
+        author.setBirthDate("30/11/1996");
 
         EBook book = new EBook();
 
         book.setISBN(123456789);
-        book.setAuthor("Andrea Verde");
+        book.setAuthor("Luca Rosso");
         book.setPublisher("Feltrinelli");
-        book.setTitle("Il libro");
-        book.setGenre("Fantasy");
+        book.setTitle("Il Killer");
         book.setGenreList(genre);
 
         book.setFormat("PDF");
@@ -226,7 +224,7 @@ public class LibrarySystemTest {
         author.setBirthDate("23/03/2010");
         author.setNationality("American");
 
-        // Aggiungi l'autore come suo collaboratore (self-loop)
+
         Set<Author> collaborators = new HashSet<>();
         collaborators.add(author);
         author.setCollaborators(collaborators);
