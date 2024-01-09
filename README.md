@@ -64,7 +64,7 @@ This project uses [GitLab](https://gitlab.com/) for version control and manages 
 1. **Clone the repository:**
    ```bash
    git clone https://gitlab.com/andrew1234567/2023_assignment03_librarysystem.git
-   cd project-name
+   cd 2023_assignment03_librarysystem
    ```
    
 2. **Copy `application.properties`:**
