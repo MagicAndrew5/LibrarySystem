@@ -1,96 +1,101 @@
-# 2023_assignment03_librarysystem
+# Library Management System
 
+This project is a Library Management System implemented using Java and Spring Boot. The system allows for the management of books, authors, genres, and library members. It supports various operations such as creating, reading, updating, and deleting (CRUD) these entities, as well as searching for books based on certain attributes.
 
+## Table of Contents
 
-## Require of Application 
-The application must implement ************CRUD************ (Create, Read, Update, Delete) and at 
-least a ************SEARCH************ operation on a set of ****************Entities**************** 
-(the search operation must work with at least two entities in a relationship, searching for a single entity 
-by ids or attributes is not enough)
+- [Prerequisites](#prerequisites)
+- [Entities](#entities)
+- [Operations](#operations)
+- [Inheritance](#inheritance)
+- [Relationships](#relationships)
+- [Installation](#installation)
+- [Additional Notes](#additional-notes)
+- [Usage](#usage)
+- [Contributors](#contributors)
+- [License](#license)
 
-There must be at least 4 entities in the system (with **********************Inheritance********************** a 
-between at least 2 of entities) and at least 3 ************************Relationship************************ 
-(including at least a **many-to-many** and **************a self-loop**************  relationship) 
-between those entities. Arbitrarily define entities and attributes.
+## Prerequisites
 
-## Architecture of project
-This project structure should provide a comprehensive implementation of CRUD operations and search functionalities, covering various types of relationships and inheritance in the context of a Library Management System.
+Make sure you have installed:
 
-To initiate the development of a Spring MVC application, begin by establishing the project structure. This involves setting up a Maven project, necessitating the creation of a `pom.xml` file to manage dependencies and project configuration.
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/javase-downloads.html)
+- [MySQL](https://www.mysql.com/)
 
-The configuration of the Spring MVC framework involves the creation of essential components:
-
-1. **Model:** Craft a straightforward Java class representing the model, typically serving as an entity for the application.
-2. **Controller:** Develop a controller class annotated with `@Controller`. This class orchestrates the interaction between the model and the view.
-3. **View:** Generate an HTML or JSP file within the designated `src/main/resources/templates` directory. This file serves as the user interface, presenting information to the end user.
-
-This structured approach forms the foundation of a Spring MVC application, fostering clarity and modularity in the development process.
-
-## Project: Library Management System
 ## Entities
 
-- ********Book********
-    - ************************************Attributes:************************************
-        - ************************************ISBN************************************
-        - ************************************Title************************************
-        - ************************************Author************************************
-        - ************************************Genre************************************
-        - ************************************Published Year************************************
-    - ******************************Relationships:******************************
-        - Many-To-Many relationship with **Author**
-        - Many-To-One relationship with **********Genre**********
-- ************Author************
-    - **Attributes**:
-        - ******************Author ID******************
-        - **Name**
-        - **Birthdate**
-    - **Relationships:**
-        - Many-To-Many relationship with ********Book********
-        - Self-Loop relationship for collaborations with other ************Author************
-- **********Genre**********
-    - **********************Attributes:**********************
-        - ****************Genre ID****************
-        - ********Name********
-    - ****************************Relationships:****************************
-        - One-To-Many relationship with ********Book********
-- **************************LibraryMember**************************
-    - ********************Attributes:********************
-        - ********************Member ID********************
-        - **********Name**********
-        - **************Address**************
-        - **Membership Start Date**
-    - ****************************Relationships:****************************
-        - Many-To-Many relationship with **********Book**********
+The system includes the following entities:
+
+- `Book`: Represents a book in the library. Attributes include ISBN, title, author, genre, and published year.
+- `Author`: Represents an author of books. Attributes include author ID, name, surname and birthdate.
+- `Genre`: Represents a genre of books. Attributes include genre ID and name.
+- `LibraryMember`: Represents a member of the library. Attributes include member ID, name, surname, and membership start date.
+- `EBook`: Represents an electronic book. This entity inherits from `Book` and includes additional attributes such as format and size Mb.
+- `User` : Represents a user of the system. Attributes include user ID, name, surname, username, password, email, phone number and city.
 
 ## Operations
 
-- **CREATE**:
-    - Ability to add new books, authors, genre, and library members
-- **READ**:
-    - Display information about books, authors, genre and library members
-    - View the books borrowed by a library member
-- **UPDATE**:
-    - Modify information about existing books, authors, genres and library members
-- **DELETE**:
-    - Remove books, authors, genres, and library members from the system
-- **SEARCH**:
-    - Implement a search operation that involves a Many-to-Many relationship (e.g., search for books by a specific author)
-    - Implement a search operation that involves a Self-loop relationship (e.g., find co-authors for a given author)
+The system supports the following operations:
 
-## INHERITANCE
+- **Create**: Add new books, authors, genres, library members, users.
+- **Read**: Display information about books, authors, genres, library members and users. View books borrowed by a library member, historical books, and all books that are in the library.
+- **Update**: Modify information about existing books, authors, genres, and library members.
+- **Delete**: Remove books, authors, genres, and library members from the system.
+- **Search**: Search for books with a specific title and author. Ability to search for EBooks. Search for books by doing a more advanced search by passing as a parameter the nationality of the author and the publisher of the book.
 
-- **Book and EBook:**
-    - Introduce an **EBook** entity that inherits from ********Book******** entity.
-    - Additional attributes for ****EBook:****
-        - ************Format************
-        - **Download Link**
+## Inheritance
 
-## RELATIONSHIPS
+The `EBook` entity inherits from the `Book` entity, representing an electronic version of a book with additional attributes such as format and size Mb.
 
-- **************************MANY-TO-MANY:**************************
-    - ************Books************ and ****Authors**** have a Many-To-Many relationship, as an author can write multiple **********Books********** and a ********Book******** can have multiple **************Authors**************
-- ********************SELF-LOOP:********************
-    - **************Authors************** have a Self-Loop relationship, representing collaborations between authors
-- ****************************************OTHER RELATIONSHIPS:****************************************
-    - Many-To-One relationship between **********Book********** and **Genre**
-    - Many-To-Many relationship between ****************************LibraryMember**************************** and ********Book******** (Books borrowed by a member)
+## Relationships
+
+The system includes the following relationships between entities:
+
+- **Many-to-Many**: A book can have multiple authors and an author can write multiple books.
+- **Self-Loop**: An author can collaborate with other authors, represented as a self-loop relationship.
+- **Many-to-One**: A book has one genre, but a genre can be associated with many books.
+- **Many-to-Many**: A library member can borrow multiple books and a book can be borrowed by multiple library members.
+
+## Installation
+
+This project uses [GitLab](https://gitlab.com/) for version control and manages the database configuration through an ignored `application.properties` file for security reasons. To successfully run the project, you need to create a local copy of the `application.properties` file with the correct database information.
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://gitlab.com/andrew1234567/2023_assignment03_librarysystem.git
+   cd project-name
+   ```
+   
+2. **Copy `application.properties`:**
+    - Create a copy of the `application.properties` file with your database configurations. The file should be located in the `src/main/resources/` directory. Ensure not to share this file with the repository, as it may contain sensitive information such as database usernames and passwords.
+
+3. **Database configuration:**
+    - Ensure you have a MySQL database created with the name "library" or update the datasource URL in the `application.properties` file with your database information.
+
+4. **Run the application:**
+    - You can use your preferred development environment to run the application. For example, with Maven:
+      ```bash
+      ./mvnw spring-boot:run
+      ```
+
+5. **Check the execution:**
+    - Open your browser and go to [http://localhost:8080](http://localhost:8080) to verify that the application is running correctly.
+
+## Additional Notes
+
+- Never share the `application.properties` file with your database credentials in the repository. Add the file to your `.gitignore` to avoid tracking.
+- For further details on Spring Boot configuration, refer to [the official documentation](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/).
+
+## Usage
+
+To run the Library Management System, navigate to the target directory and run the command `java -jar librarysystem-0.0.1-SNAPSHOT.jar`.
+
+## Contributors
+
+This project is maintained by a team of dedicated developers. Contributions are welcome. Please fork the repository and submit a pull request with your changes.
+
+## License
+
+This project is licensed under the MIT License.
+
