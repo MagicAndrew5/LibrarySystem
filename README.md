@@ -82,6 +82,28 @@ This project uses [GitLab](https://gitlab.com/) for version control and manages 
 5. **Check the execution:**
     - Open your browser and go to [http://localhost:8080](http://localhost:8080) to verify that the application is running correctly.
 
+## Others Folder
+
+The `others` folder contains scripts that generate various data for the project. These scripts are written in Python and are organized in the `generatevalue` subfolder. Here's a brief overview of each script:
+
+- `GenerateAuthors.ipynb`: This script generates a list of authors with random names, surnames, birth dates, and nationalities. The output is saved in a CSV file named `author.csv`.
+
+- `GenerateBooks.ipynb`: This script generates a list of books with random attributes such as file size, genre, ISBN, book type, author, publisher, title, and format. The output is saved in a CSV file named `booksR.csv`.
+
+- `GenerateGenre.ipynb`: This script generates a list of book genres. The output is saved in a CSV file named `genre.csv`.
+
+Please note that these scripts are used for generating dummy data for testing purposes.
+
+Also encompasses various elements contributing to a comprehensive understanding of the project:
+
+- `diagrams:` This folder holds UML diagrams, providing visual representations of the system's structure and behavior. These diagrams are invaluable for grasping the application's overall design and architecture.
+
+- `mysqldatabase:` Containing a MySQL database dump, this folder facilitates database setup by offering pre-populated data for testing and development.
+
+- `screenshot:` For a visual representation of the application's user interface, the `screenshot` folder stores images capturing the application in action when running on `localhost:8080`.
+
+These components collectively contribute to the efficient development, testing, and documentation of the project. For further details on each script or additional elements, refer to the specific subfolders within `others`.
+
 ## Additional Notes
 
 - Never share the `application.properties` file with your database credentials in the repository. Add the file to your `.gitignore` to avoid tracking.
